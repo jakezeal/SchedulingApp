@@ -4,7 +4,7 @@
 use_frameworks!
 
 target 'SchedulingApp' do
-
+pod 'Parse'
 pod 'FSCalendar'
 
 end
