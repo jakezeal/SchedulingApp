@@ -174,10 +174,10 @@
             </objects>
             <point key="canvasLocation" x="747" y="418"/>
         </scene>
-        <!--View Controller-->
+        <!--Calendar Table View Controller-->
         <scene sceneID="Zxe-nr-QHA">
             <objects>
-                <viewController id="4AN-5U-J4S" sceneMemberID="viewController">
+                <viewController id="4AN-5U-J4S" customClass="CalendarTableViewController" customModule="SchedulingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VD2-c1-QBZ"/>
                         <viewControllerLayoutGuide type="bottom" id="nqW-Kd-7SG"/>
@@ -186,16 +186,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Specific day View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1C-nU-BY7">
-                                <rect key="frame" x="47" y="206" width="215" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdb-cw-ILd">
+                                <rect key="frame" x="20" y="72" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fE9-8y-E7M">
+                                <rect key="frame" x="0.0" y="101" width="320" height="379"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="E2q-Qc-Eh6" customClass="CalendarTableViewCell" customModule="SchedulingApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E2q-Qc-Eh6" id="Ne6-Rs-SlL">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="4AN-5U-J4S" id="sex-sz-O7I"/>
+                                    <outlet property="delegate" destination="4AN-5U-J4S" id="cj9-cg-nUs"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Rdb-cw-ILd" firstAttribute="top" secondItem="VD2-c1-QBZ" secondAttribute="bottom" constant="8" id="35t-qO-pxv"/>
+                            <constraint firstAttribute="trailing" secondItem="fE9-8y-E7M" secondAttribute="trailing" id="7nm-xC-l4n"/>
+                            <constraint firstItem="fE9-8y-E7M" firstAttribute="top" secondItem="Rdb-cw-ILd" secondAttribute="bottom" constant="8" id="8cA-O3-Db1"/>
+                            <constraint firstItem="nqW-Kd-7SG" firstAttribute="top" secondItem="fE9-8y-E7M" secondAttribute="bottom" id="EKK-Ol-KcC"/>
+                            <constraint firstItem="fE9-8y-E7M" firstAttribute="top" secondItem="Rdb-cw-ILd" secondAttribute="bottom" constant="8" id="IVX-Gy-vby"/>
+                            <constraint firstItem="fE9-8y-E7M" firstAttribute="leading" secondItem="ntm-fB-Oix" secondAttribute="leading" id="QLj-kV-7gu"/>
+                            <constraint firstItem="Rdb-cw-ILd" firstAttribute="leading" secondItem="ntm-fB-Oix" secondAttribute="leading" constant="20" id="YNz-3C-2Wc"/>
+                            <constraint firstAttribute="trailing" secondItem="Rdb-cw-ILd" secondAttribute="trailing" constant="20" id="p5f-mo-Sn9"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="Rdb-cw-ILd" id="Zwg-8w-QRd"/>
+                        <outlet property="tableView" destination="fE9-8y-E7M" id="9yZ-hT-nPn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8n-7r-u9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -566,7 +598,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <segue destination="4AN-5U-J4S" kind="show" id="nDv-TF-FBz"/>
+                        <outlet property="calendar" destination="mYM-wZ-FT3" id="KPK-21-u1f"/>
+                        <segue destination="4AN-5U-J4S" kind="show" identifier="showCalendarTableView" id="ghK-cA-ohn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPj-Ir-e0J" userLabel="First Responder" sceneMemberID="firstResponder"/>
