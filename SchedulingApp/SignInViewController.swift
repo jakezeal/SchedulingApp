@@ -50,6 +50,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         if !(username ?? "").isEmpty && !(password ?? "").isEmpty {
             userSignIn(username!, password: password!)
+            segueToCalendarCollectionViewController()
             //** Determine which view we will go to based on account type. **//
         } else {
             showAlert()
@@ -61,9 +62,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK:- Segues
-    //    func segueToTrainersViewController() {
-    //        performSegueWithIdentifier("", sender: nil)
-    //    }
+        func segueToCalendarCollectionViewController() {
+            performSegueWithIdentifier("CalendarCollectionViewController", sender: nil)
+        }
     
     // MARK:- Helpers
     

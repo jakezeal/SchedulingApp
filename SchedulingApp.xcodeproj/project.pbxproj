@@ -10,13 +10,16 @@
 		C60A8F95C346E8CC34C0E370 /* Pods_SchedulingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676FC0CB8EA52EDB5A7DD827 /* Pods_SchedulingApp.framework */; };
 		E205928D1CC951610042E162 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205928C1CC951610042E162 /* WelcomeViewController.swift */; };
 		E20592931CC951E60042E162 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20592921CC951E60042E162 /* ForgotPasswordViewController.swift */; };
+		E20592981CC96F470042E162 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20592971CC96F470042E162 /* CalendarViewController.swift */; };
+		E205929A1CC971770042E162 /* CalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20592991CC971770042E162 /* CalendarCollectionViewController.swift */; };
+		E205929C1CC971DD0042E162 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205929B1CC971DD0042E162 /* CalendarCollectionViewCell.swift */; };
 		E2752D961CC9439F00B76C3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2752D951CC9439F00B76C3E /* AppDelegate.swift */; };
 		E2752D981CC9439F00B76C3E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2752D971CC9439F00B76C3E /* SignInViewController.swift */; };
 		E2752D9B1CC9439F00B76C3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2752D991CC9439F00B76C3E /* Main.storyboard */; };
 		E2752D9D1CC943A000B76C3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2752D9C1CC943A000B76C3E /* Assets.xcassets */; };
 		E2752DA01CC943A000B76C3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2752D9E1CC943A000B76C3E /* LaunchScreen.storyboard */; };
 		E2752DA91CC949BA00B76C3E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2752DA81CC949BA00B76C3E /* DataManager.swift */; };
-		E2752DAB1CC94ACA00B76C3E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2752DAA1CC94ACA00B76C3E /* SignupViewController.swift */; };
+		E2752DAB1CC94ACA00B76C3E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2752DAA1CC94ACA00B76C3E /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		C69A75E2A9137EF364DB96FC /* Pods-SchedulingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchedulingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SchedulingApp/Pods-SchedulingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E205928C1CC951610042E162 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E20592921CC951E60042E162 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		E20592971CC96F470042E162 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		E20592991CC971770042E162 /* CalendarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewController.swift; sourceTree = "<group>"; };
+		E205929B1CC971DD0042E162 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2752D921CC9439F00B76C3E /* SchedulingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchedulingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2752D951CC9439F00B76C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2752D971CC9439F00B76C3E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -34,7 +40,7 @@
 		E2752DA11CC943A000B76C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2752DA71CC9459000B76C3E /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		E2752DA81CC949BA00B76C3E /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		E2752DAA1CC94ACA00B76C3E /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		E2752DAA1CC94ACA00B76C3E /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +77,7 @@
 			children = (
 				E205928C1CC951610042E162 /* WelcomeViewController.swift */,
 				E20592921CC951E60042E162 /* ForgotPasswordViewController.swift */,
-				E2752DAA1CC94ACA00B76C3E /* SignupViewController.swift */,
+				E2752DAA1CC94ACA00B76C3E /* SignUpViewController.swift */,
 				E2752D971CC9439F00B76C3E /* SignInViewController.swift */,
 			);
 			name = "Sign In / Sign Up";
@@ -83,6 +89,16 @@
 				E2752DA81CC949BA00B76C3E /* DataManager.swift */,
 			);
 			name = DataManager;
+			sourceTree = "<group>";
+		};
+		E20592961CC96F220042E162 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				E20592971CC96F470042E162 /* CalendarViewController.swift */,
+				E20592991CC971770042E162 /* CalendarCollectionViewController.swift */,
+				E205929B1CC971DD0042E162 /* CalendarCollectionViewCell.swift */,
+			);
+			name = Calendar;
 			sourceTree = "<group>";
 		};
 		E2752D891CC9439F00B76C3E = {
@@ -108,6 +124,7 @@
 			children = (
 				E2752D951CC9439F00B76C3E /* AppDelegate.swift */,
 				E20592941CC951EB0042E162 /* Sign In / Sign Up */,
+				E20592961CC96F220042E162 /* Calendar */,
 				E20592951CC9520B0042E162 /* DataManager */,
 				E2752D991CC9439F00B76C3E /* Main.storyboard */,
 				E2752D9C1CC943A000B76C3E /* Assets.xcassets */,
@@ -245,7 +262,10 @@
 				E205928D1CC951610042E162 /* WelcomeViewController.swift in Sources */,
 				E2752D981CC9439F00B76C3E /* SignInViewController.swift in Sources */,
 				E2752DA91CC949BA00B76C3E /* DataManager.swift in Sources */,
-				E2752DAB1CC94ACA00B76C3E /* SignupViewController.swift in Sources */,
+				E2752DAB1CC94ACA00B76C3E /* SignUpViewController.swift in Sources */,
+				E20592981CC96F470042E162 /* CalendarViewController.swift in Sources */,
+				E205929C1CC971DD0042E162 /* CalendarCollectionViewCell.swift in Sources */,
+				E205929A1CC971770042E162 /* CalendarCollectionViewController.swift in Sources */,
 				E2752D961CC9439F00B76C3E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

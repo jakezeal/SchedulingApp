@@ -30,9 +30,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var errorLabel: UILabel!
     
-    @IBOutlet weak var usernameSignUp: UITextField!
-    @IBOutlet weak var passwordSignUp: UITextField!
-    
     // MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +41,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         usernameTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        self.passwordSignUp.secureTextEntry = true
+        self.passwordTextField.secureTextEntry = true
     }
     
     // MARK:- Actions
