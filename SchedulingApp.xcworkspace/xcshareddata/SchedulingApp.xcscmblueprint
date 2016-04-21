@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CD0951AAE4C1E22768C3AAE2A5DA971F4F8003E2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "802C9E8A2076237CC07171121CB78F15FC972E84" : 0,
+    "CD0951AAE4C1E22768C3AAE2A5DA971F4F8003E2" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "ED66340A-4FDC-43DE-B101-B88BB64460C1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "802C9E8A2076237CC07171121CB78F15FC972E84" : "..",
+    "CD0951AAE4C1E22768C3AAE2A5DA971F4F8003E2" : "SchedulingApp\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SchedulingApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SchedulingApp.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jpaaquino\/lighthouse.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "802C9E8A2076237CC07171121CB78F15FC972E84"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jakezeal\/SchedulingApp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CD0951AAE4C1E22768C3AAE2A5DA971F4F8003E2"
+    }
+  ]
+}
