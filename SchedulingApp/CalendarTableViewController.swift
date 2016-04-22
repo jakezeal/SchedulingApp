@@ -8,11 +8,12 @@
 
 import UIKit
 
-class CalendarTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CalendarTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CalendarDetailsDelegate {
 
     //MARK:- Properties
     var newDate = NSDate()
     var hours: [NSDate] = []
+    var event = Event()
     
     //MARK:- Outlets
     @IBOutlet weak var dateLabel: UILabel!
@@ -25,6 +26,12 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         
         makeHoursArray()
         formatDateLabel()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.tableView.reloadData()
+        
     }
     
     // MARK:- UITableViewDataSource
@@ -33,12 +40,14 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CalendarTableViewCell
         
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
         cell.textLabel!.text = formatter.stringFromDate(hours[indexPath.row])
+        cell.detailsLabel.text = event.details
+        
         return cell
     }
 
@@ -69,6 +78,9 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         
         if segue.identifier == "showDetailsVC" {
             let calendarDetailsVC = segue.destinationViewController as! CalendarDetailsViewController
+            
+            calendarDetailsVC.delegate = self
+            
             //Get the cell that generated this segue.
             if let selectedHour = sender as? CalendarTableViewCell {
                 let indexPath = tableView.indexPathForCell(selectedHour)!
@@ -78,5 +90,10 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
 
+    //MARK: CalendarDetailsDelegate
+    func getDetailsData(event: Event) {
+        self.event = event
+        print("\(event.name), \(event.details)")
+    }
     
 }
