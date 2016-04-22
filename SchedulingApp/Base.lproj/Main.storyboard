@@ -113,7 +113,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="Q7p-jK-v8e" eventType="touchUpInside" id="igI-gz-Jwh"/>
-                                    <segue destination="h1k-ml-sr1" kind="show" identifier="CalendarCollectionViewController" id="mJ4-PL-szr"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Failure Text that spans multiple lines" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxI-AD-uVf">
@@ -168,6 +167,7 @@
                         <outlet property="loginButton" destination="m3F-fT-txK" id="fBd-jO-0Kf"/>
                         <outlet property="passwordTextField" destination="LgK-TT-bei" id="CNT-D6-xFe"/>
                         <outlet property="usernameTextField" destination="HiD-0p-3fh" id="F58-bQ-abg"/>
+                        <segue destination="h1k-ml-sr1" kind="show" identifier="CalendarCollectionViewController" id="8on-TG-w8a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgC-b2-uKb" userLabel="First Responder" sceneMemberID="firstResponder"/>

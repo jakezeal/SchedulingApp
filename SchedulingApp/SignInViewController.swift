@@ -49,7 +49,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         if !(username ?? "").isEmpty && !(password ?? "").isEmpty {
             userSignIn(username!, password: password!)
-            segueToCalendarCollectionViewController()
             //** Determine which view we will go to based on account type. **//
         } else {
             showAlert()
@@ -75,7 +74,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     func userSignIn(username: String, password: String) {
         DataManager.sharedInstance.signInUser(username, password: password) { (user, error) -> Void in
             if user != nil {
-                self.showAlert(SignInViewControllerConstants.successTitle, message: SignInViewControllerConstants.successMessage)
+                self.segueToCalendarCollectionViewController()
             } else {
                 self.showAlert()
             }

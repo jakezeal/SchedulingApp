@@ -10,39 +10,24 @@ import UIKit
 
 class CalendarTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var dateLabel: UILabel!
-    
+    //MARK:- Properties
     var newDate = NSDate()
     var hours: [NSDate] = []
     
+    //MARK:- Outlets
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
-    
+    //MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.hours.append(newDate)
         
         makeHoursArray()
         formatDateLabel()
     }
     
-    func makeHoursArray() {
-        let interval: Double = 3600
-        for hour in 1..<24 {
-            let nextHour = newDate.dateByAddingTimeInterval(interval*Double(hour))
-            self.hours.append(nextHour)
-        }
-    }
-    
-    func formatDateLabel() {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        self.dateLabel.text = formatter.stringFromDate(newDate)
-    }
-    
-    
-    // MARK: Table View Data Source
+    // MARK:- UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.hours.count
     }
@@ -56,25 +41,27 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         cell.textLabel!.text = formatter.stringFromDate(hours[indexPath.row])
         return cell
     }
-    
-    // MARK: Table View Delegate
+
+    // MARK:- UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
         print("Date: \(formatter.stringFromDate(hours[indexPath.row]))")
     }
-
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //MARK:- Helpers
+    func makeHoursArray() {
+        let interval: Double = 3600
+        for hour in 1..<24 {
+            let nextHour = newDate.dateByAddingTimeInterval(interval*Double(hour))
+            self.hours.append(nextHour)
+        }
     }
-    */
-
+    
+    func formatDateLabel() {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        self.dateLabel.text = formatter.stringFromDate(newDate)
+    }
 }

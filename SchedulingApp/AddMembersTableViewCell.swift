@@ -9,6 +9,5 @@
 import UIKit
 
 class AddMembersTableViewCell: UITableViewCell {
-    //MARK:- Outlets
     @IBOutlet weak var userLabel: UILabel!
 }

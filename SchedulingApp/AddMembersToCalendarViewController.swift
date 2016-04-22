@@ -78,7 +78,6 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
         DataManager.sharedInstance.queryUsersWithTextField(self.userTextField.text!) { (objects, error) in
             
             if error == nil {
-                
                 if objects!.count > 0 {
                     self.userExists = true
                 } else {
