@@ -45,7 +45,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
-        cell.textLabel!.text = formatter.stringFromDate(hours[indexPath.row])
+        cell.hourLabel.text = formatter.stringFromDate(hours[indexPath.row])
         cell.detailsLabel.text = event.details
         
         return cell
