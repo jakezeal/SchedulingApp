@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
@@ -74,7 +73,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func userSignIn(username: String, password: String) {
-        DataManager.sharedInstance.signInTrainer(username, password: password) { (user, error) -> Void in
+        DataManager.sharedInstance.signInUser(username, password: password) { (user, error) -> Void in
             if user != nil {
                 self.showAlert(SignInViewControllerConstants.successTitle, message: SignInViewControllerConstants.successMessage)
             } else {

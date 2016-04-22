@@ -28,12 +28,19 @@ class DataManager {
         let user = PFUser()
         user.username = username
         user.password = password
-        user.signUpInBackgroundWithBlock(block);
+        user.signUpInBackgroundWithBlock(block)
     }
     
-    func signInTrainer(username:String, password:String, block:(PFUser?, NSError?) -> Void) {
+    func signInUser(username:String, password:String, block:(PFUser?, NSError?) -> Void) {
         PFUser.logInWithUsernameInBackground(username, password: password, block: block)
     }
+    
+    func queryUsersWithTextField(username: String, block:(PFQueryArrayResultBlock?)) {
+        let query = PFUser.query()
+        query!.whereKey("username", equalTo:username)
+        query!.findObjectsInBackgroundWithBlock(block)
+    }
+    
 }
 
 //MARK:- Extensions
