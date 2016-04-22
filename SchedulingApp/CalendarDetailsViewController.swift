@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CalendarDetailsDelegate {
+    func getDetailsData(event: Event)
+}
+
 class CalendarDetailsViewController: UIViewController {
 
     @IBOutlet weak var eventName: UITextField!
@@ -15,6 +19,10 @@ class CalendarDetailsViewController: UIViewController {
     @IBOutlet weak var timeHeading: UILabel!
     
     var hourDetails = NSDate()
+    var delegate: CalendarDetailsDelegate?
+    var event = Event()
+//    var eventNameString: String?
+//    var eventDetailsString: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +35,11 @@ class CalendarDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     @IBAction func pressedSaveDetails(sender: UIButton) {
+        self.event.name = self.eventName.text
+        self.event.details = self.eventDetails.text
+        
+        delegate?.getDetailsData(self.event)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
