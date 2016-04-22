@@ -10,15 +10,28 @@ import UIKit
 
 class WelcomeViewController : UIViewController {
     
+    //MARK:- Outlets
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
+    //MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = true
+        prepareView()
+        prepareImageView()
     }
     
+    //MARK:- Preperations
+    func prepareView() {
+       self.navigationController?.navigationBarHidden = true
+    }
     
+    func prepareImageView() {
+        self.imageView.image = UIImage.init(named: "CalendarIcon")
+    }
+    
+    //MARK:- Actions
     @IBAction func signUpButtonPressed(sender: AnyObject) {
         
     }
