@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		31400A841CC97B280091EAFA /* CalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400A831CC97B280091EAFA /* CalendarTableViewController.swift */; };
 		31400A861CC97BE50091EAFA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400A851CC97BE50091EAFA /* CalendarTableViewCell.swift */; };
+		3F048E101CC9A134002FEF9B /* CreateNewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F048E0F1CC9A134002FEF9B /* CreateNewGroupViewController.swift */; };
 		C60A8F95C346E8CC34C0E370 /* Pods_SchedulingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676FC0CB8EA52EDB5A7DD827 /* Pods_SchedulingApp.framework */; };
 		E205928D1CC951610042E162 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205928C1CC951610042E162 /* WelcomeViewController.swift */; };
 		E20592931CC951E60042E162 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20592921CC951E60042E162 /* ForgotPasswordViewController.swift */; };
@@ -28,6 +29,7 @@
 		1CE0C2511D9BE202CB234867 /* Pods-SchedulingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchedulingApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SchedulingApp/Pods-SchedulingApp.release.xcconfig"; sourceTree = "<group>"; };
 		31400A831CC97B280091EAFA /* CalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewController.swift; sourceTree = "<group>"; };
 		31400A851CC97BE50091EAFA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
+		3F048E0F1CC9A134002FEF9B /* CreateNewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewGroupViewController.swift; sourceTree = "<group>"; };
 		676FC0CB8EA52EDB5A7DD827 /* Pods_SchedulingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SchedulingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C69A75E2A9137EF364DB96FC /* Pods-SchedulingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchedulingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SchedulingApp/Pods-SchedulingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E205928C1CC951610042E162 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		E2752D941CC9439F00B76C3E /* SchedulingApp */ = {
 			isa = PBXGroup;
 			children = (
+				3F048E0F1CC9A134002FEF9B /* CreateNewGroupViewController.swift */,
 				E2752D951CC9439F00B76C3E /* AppDelegate.swift */,
 				E20592941CC951EB0042E162 /* Sign In / Sign Up */,
 				E20592961CC96F220042E162 /* Calendar */,
@@ -176,7 +179,7 @@
 				TargetAttributes = {
 					E2752D911CC9439F00B76C3E = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 3Z2CXNDUGU;
+						DevelopmentTeam = TN75WULY37;
 					};
 				};
 			};
@@ -267,6 +270,7 @@
 				E20592931CC951E60042E162 /* ForgotPasswordViewController.swift in Sources */,
 				31400A841CC97B280091EAFA /* CalendarTableViewController.swift in Sources */,
 				E205928D1CC951610042E162 /* WelcomeViewController.swift in Sources */,
+				3F048E101CC9A134002FEF9B /* CreateNewGroupViewController.swift in Sources */,
 				E2752D981CC9439F00B76C3E /* SignInViewController.swift in Sources */,
 				E2752DA91CC949BA00B76C3E /* DataManager.swift in Sources */,
 				E2752DAB1CC94ACA00B76C3E /* SignUpViewController.swift in Sources */,
@@ -388,10 +392,13 @@
 			baseConfigurationReference = C69A75E2A9137EF364DB96FC /* Pods-SchedulingApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SchedulingApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jakezeal.SchedulingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = SchedulingApp/bridge.h;
 			};
 			name = Debug;
@@ -401,10 +408,13 @@
 			baseConfigurationReference = 1CE0C2511D9BE202CB234867 /* Pods-SchedulingApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SchedulingApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jakezeal.SchedulingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = SchedulingApp/bridge.h;
 			};
 			name = Release;
