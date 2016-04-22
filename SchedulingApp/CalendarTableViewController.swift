@@ -51,7 +51,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         return cell
     }
 
-    // MARK:- UITableViewDelegate
+    //MARK:- UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")

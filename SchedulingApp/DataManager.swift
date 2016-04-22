@@ -41,6 +41,7 @@ class DataManager {
         query!.findObjectsInBackgroundWithBlock(block)
     }
     
+    
 }
 
 //MARK:- Extensions

@@ -522,11 +522,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="59R-9R-JUZ">
-                                <rect key="frame" x="16" y="191" width="206" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJB-we-V4z">
+                                <rect key="frame" x="270" y="191" width="30" height="30"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addMemberAction:" destination="5e7-yx-u64" eventType="touchUpInside" id="9Hj-8D-5Rv"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YJf-yP-Aum">
                                 <rect key="frame" x="0.0" y="273" width="320" height="207"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -575,13 +577,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJB-we-V4z">
-                                <rect key="frame" x="270" y="191" width="30" height="30"/>
-                                <state key="normal" title="Add"/>
-                                <connections>
-                                    <action selector="addMemberAction:" destination="5e7-yx-u64" eventType="touchUpInside" id="9Hj-8D-5Rv"/>
-                                </connections>
-                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="59R-9R-JUZ">
+                                <rect key="frame" x="16" y="191" width="206" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -600,10 +600,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create" id="wzG-NX-bnF">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="kdi-v3-STz"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="kdi-v3-STz">
+                            <connections>
+                                <action selector="saveCalendar:" destination="5e7-yx-u64" id="B7e-Ni-Lo9"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="calendarTextField" destination="Ef8-Ge-dLj" id="Eqb-2k-KdF"/>
                         <outlet property="tableView" destination="YJf-yP-Aum" id="Yme-gF-YKF"/>
                         <outlet property="userTextField" destination="59R-9R-JUZ" id="8kO-Gy-40W"/>
                     </connections>

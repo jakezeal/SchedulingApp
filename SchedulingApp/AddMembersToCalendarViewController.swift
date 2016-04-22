@@ -15,9 +15,11 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     var users:[User] = []
     
     // MARK:- Outlets
+    @IBOutlet weak var calendarTextField: UITextField!
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTableView()
@@ -32,6 +34,10 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     // MARK:- Actions
     @IBAction func addMemberAction(sender: AnyObject) {
         doesUserExist()
+    }
+    
+    @IBAction func saveCalendar(sender: UIBarButtonItem) {
+        saveCalendar()
     }
     
     // MARK:- UITableViewDataSource
@@ -95,5 +101,9 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
                 print("Error: \(error!.localizedDescription) \(error!.userInfo)")
             }
         }
+    }
+    
+    func saveCalendar() {
+        // Save calendar name, users associated with it and 0 events.
     }
 }
