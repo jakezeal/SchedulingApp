@@ -51,26 +51,35 @@ class CreateNewGroupViewController: UIViewController,UITableViewDataSource,UITab
             
             if error == nil {
                 // The find succeeded.
-                print("Successfully retrieved \(objects!.count) usernames.")
+                if(objects!.count > 0){
                 self.userExists = true
+                print("Successfully retrieved \(objects!.count) usernames.")
+                }else{
+                self.userExists = false
+                print("That username does not exist")
+
+                }
                 // Do something with the found objects
                 if let objects = objects {
                     for object in objects {
                         if let result = object["username"] as? String{
                             print(result)
-                            dispatch_async(dispatch_get_main_queue(),{
-                                
-                                self.handleUser()
-                                
-                            })
                             
                         }
+                       
                     }
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.handleUser()
+                        
+                    })
+
                     
                 }
             } else {
                 // Log details of the failure
                 print("Error: \(error!) \(error!.userInfo)")
+               
             }
         }
     }
@@ -88,7 +97,7 @@ class CreateNewGroupViewController: UIViewController,UITableViewDataSource,UITab
     }
     
     func handleUser(){
-        if(self.userExists!){
+        if(self.userExists! == true){
             let aUser = User()
             aUser.name = self.userTextField.text!
             self.userArray.insert(aUser,atIndex:0)
