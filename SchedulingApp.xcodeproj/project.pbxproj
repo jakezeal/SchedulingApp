@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		31400A841CC97B280091EAFA /* CalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400A831CC97B280091EAFA /* CalendarTableViewController.swift */; };
 		31400A861CC97BE50091EAFA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400A851CC97BE50091EAFA /* CalendarTableViewCell.swift */; };
+		31400A881CCA830F0091EAFA /* CalendarDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400A871CCA830E0091EAFA /* CalendarDetailsViewController.swift */; };
 		C60A8F95C346E8CC34C0E370 /* Pods_SchedulingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676FC0CB8EA52EDB5A7DD827 /* Pods_SchedulingApp.framework */; };
 		E205928D1CC951610042E162 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205928C1CC951610042E162 /* WelcomeViewController.swift */; };
 		E20592931CC951E60042E162 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20592921CC951E60042E162 /* ForgotPasswordViewController.swift */; };
@@ -31,6 +32,7 @@
 		1CE0C2511D9BE202CB234867 /* Pods-SchedulingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchedulingApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SchedulingApp/Pods-SchedulingApp.release.xcconfig"; sourceTree = "<group>"; };
 		31400A831CC97B280091EAFA /* CalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewController.swift; sourceTree = "<group>"; };
 		31400A851CC97BE50091EAFA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
+		31400A871CCA830E0091EAFA /* CalendarDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDetailsViewController.swift; sourceTree = "<group>"; };
 		676FC0CB8EA52EDB5A7DD827 /* Pods_SchedulingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SchedulingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C69A75E2A9137EF364DB96FC /* Pods-SchedulingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchedulingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SchedulingApp/Pods-SchedulingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E205928C1CC951610042E162 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				E205929B1CC971DD0042E162 /* CalendarCollectionViewCell.swift */,
 				31400A831CC97B280091EAFA /* CalendarTableViewController.swift */,
 				31400A851CC97BE50091EAFA /* CalendarTableViewCell.swift */,
+				31400A871CCA830E0091EAFA /* CalendarDetailsViewController.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				31400A841CC97B280091EAFA /* CalendarTableViewController.swift in Sources */,
 				E205928D1CC951610042E162 /* WelcomeViewController.swift in Sources */,
 				E2752D981CC9439F00B76C3E /* SignInViewController.swift in Sources */,
+				31400A881CCA830F0091EAFA /* CalendarDetailsViewController.swift in Sources */,
 				E2752DA91CC949BA00B76C3E /* DataManager.swift in Sources */,
 				E2752DAB1CC94ACA00B76C3E /* SignUpViewController.swift in Sources */,
 				E20592981CC96F470042E162 /* CalendarViewController.swift in Sources */,

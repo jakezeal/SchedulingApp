@@ -64,4 +64,19 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         formatter.dateStyle = .MediumStyle
         self.dateLabel.text = formatter.stringFromDate(newDate)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showDetailsVC" {
+            let calendarDetailsVC = segue.destinationViewController as! CalendarDetailsViewController
+            //Get the cell that generated this segue.
+            if let selectedHour = sender as? CalendarTableViewCell {
+                let indexPath = tableView.indexPathForCell(selectedHour)!
+                let hour = hours[indexPath.row]
+                calendarDetailsVC.hourDetails = hour
+            }
+        }
+    }
+
+    
 }
