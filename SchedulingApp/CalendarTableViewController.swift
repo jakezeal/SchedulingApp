@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class CalendarTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CalendarDetailsDelegate {
 
@@ -14,6 +15,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     var newDate = NSDate()
     var hours: [NSDate] = []
     var event = Event()
+//    var eventIDs: [String] = []
     
     //MARK:- Outlets
     @IBOutlet weak var dateLabel: UILabel!
@@ -34,7 +36,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         
     }
     
-    // MARK:- UITableViewDataSource
+    //MARK:- UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.hours.count
     }
@@ -46,8 +48,15 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
         cell.hourLabel.text = formatter.stringFromDate(hours[indexPath.row])
-        cell.detailsLabel.text = event.details
+       
+        print("cell date: \(hours[indexPath.row]) == event.date: \(self.event.date)")
+//        if (self.newDate == self.event.date){
         
+        if self.event.date != nil {
+            if (hours[indexPath.row].compare(self.event.date!) == NSComparisonResult.OrderedSame){
+                cell.detailsLabel.text = self.event.details
+            }
+        }
         return cell
     }
 
@@ -57,6 +66,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
         print("Date: \(formatter.stringFromDate(hours[indexPath.row]))")
+        print("Read date: \(hours[indexPath.row])")
     }
     
     //MARK:- Helpers
@@ -93,7 +103,28 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     //MARK: CalendarDetailsDelegate
     func getDetailsData(event: Event) {
         self.event = event
-        print("\(event.name), \(event.details)")
+        print("\(self.event.ID)")
+        queryParse(event)
+    }
+    
+    func queryParse(event: Event) {
+        let query = PFQuery(className:"Event")
+        query.whereKey("_id", equalTo: event.ID!)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil && objects != nil {
+                for object in objects! {
+                    self.event.details = object["details"] as? String
+                    print(self.event.details)
+                    self.event.name = object["name"] as? String
+                    print(self.event.name)
+                    self.event.date = object["date"] as? NSDate
+                    self.tableView.reloadData()
+                }
+            } else {
+                print(error)
+            }
+        }
     }
     
 }
