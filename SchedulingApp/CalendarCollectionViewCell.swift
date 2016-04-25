@@ -13,4 +13,6 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     //MARK:- Outlets
     @IBOutlet weak var groupLabel: UILabel!
     
+    @IBOutlet weak var calendarImage: UIImageView!
+    
 }
