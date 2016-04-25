@@ -72,7 +72,6 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
             self.tableView.reloadData()
         } else {
             let alertController = UIAlertController(title: "User does not exist!", message: "Please check spelling and try again", preferredStyle: .Alert)
-            
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)
             

@@ -16,7 +16,7 @@ protocol CalendarDetailsDelegate {
 class CalendarDetailsViewController: UIViewController {
 
     @IBOutlet weak var eventName: UITextField!
-    @IBOutlet weak var eventDetails: UITextView!
+    @IBOutlet weak var eventDetails: UITextField!
     @IBOutlet weak var timeHeading: UILabel!
     
     var hourDetails = NSDate()
@@ -34,8 +34,7 @@ class CalendarDetailsViewController: UIViewController {
         self.timeHeading.text = formatter.stringFromDate(hourDetails)
     }
     
-    @IBAction func pressedSaveDetails(sender: UIButton) {
-        
+    @IBAction func saveDetails(sender: UIBarButtonItem) {
         let e = PFObject(className:"Event")
         e["name"] = self.eventName.text
         e["details"] = self.eventDetails.text
@@ -54,13 +53,7 @@ class CalendarDetailsViewController: UIViewController {
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }
-        }
-
-//        
-//        self.event.name = self.eventName.text
-//        self.event.details = self.eventDetails.text
-//
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }

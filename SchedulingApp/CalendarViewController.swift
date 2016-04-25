@@ -11,12 +11,12 @@ import FSCalendar
 
 class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
+    //MARK:- Properties
     var didOpenCalendar: Bool!
     var date = NSDate()
-    @IBOutlet weak var calendar: FSCalendar!
     
-    let datesWithCat = ["20150505","20150605","20150705","20150805","20150905","20151005","20151105","20151205","20160106",
-                        "20160206","20160306","20160406","20160506","20160606","20160706"]
+    //MARK:- Outlets
+    @IBOutlet weak var calendar: FSCalendar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +66,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         } else if (didOpenCalendar == true) {
             didOpenCalendar = false
         }
-    }
-    
-    func calendar(calendar: FSCalendar, imageForDate date: NSDate) -> UIImage? {
-        return [13,24].containsObject(calendar.dayOfDate(date)) ? UIImage(named: "icon_cat") : nil
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
