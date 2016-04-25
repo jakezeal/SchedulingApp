@@ -9,7 +9,7 @@
 import Foundation
 
 class Calendar {
+    var calendarName = String()
     var events = [Event]()
     var users = [User]()
-    var calendarName = String()
 }

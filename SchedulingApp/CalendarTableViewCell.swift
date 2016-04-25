@@ -11,7 +11,11 @@ import UIKit
 class CalendarTableViewCell: UITableViewCell {
 
     @IBOutlet weak var hourLabel: UILabel!
-    @IBOutlet weak var detailsLabel: UILabel!
+    @IBOutlet weak var eventDetails: UILabel!
+    @IBOutlet weak var eventTitle: UILabel!
     
-    override func 
+    override func prepareForReuse() {
+        self.eventTitle.text = ""
+        self.eventDetails.text = ""
+    }
 }

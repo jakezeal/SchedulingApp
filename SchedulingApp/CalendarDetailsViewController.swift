@@ -40,7 +40,6 @@ class CalendarDetailsViewController: UIViewController {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
                 print("Event saved.")
-
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }

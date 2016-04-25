@@ -63,6 +63,9 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CalendarTableViewCell
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 40
+        
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
@@ -74,12 +77,13 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
             if key == hourString {
                 cell.detailsLabel.text = value
                 print("key: \(key) hourString: \(hourString)")
+                
             }
         }
         
         return cell
     }
-
+    
     //MARK:- UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let formatter = NSDateFormatter()
@@ -119,12 +123,14 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
             calendarDetailsVC.passSelectedDate = self.selectedDate
         }
     }
-
-    func queryParse() {
+    
+    
+    func queryParse(event: Event) {
         let query = PFQuery(className:"Event")
         if let selectedDate = self.selectedDate {
             query.whereKey("date", equalTo: selectedDate)
         }
+        
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil && objects != nil {
