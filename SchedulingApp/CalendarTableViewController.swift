@@ -9,13 +9,13 @@
 import UIKit
 import Parse
 
-class CalendarTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CalendarDetailsDelegate {
+class CalendarTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     //MARK:- Properties
     var newDate = NSDate()
     var hours: [NSDate] = []
-    var event = Event()
-//    var eventIDs: [String] = []
+    var events = [String: String]()
+    var selectedDate: String!
     
     //MARK:- Outlets
     @IBOutlet weak var dateLabel: UILabel!
@@ -25,15 +25,34 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hours.append(newDate)
-        
+        makeCurrentDateString()
         makeHoursArray()
         formatDateLabel()
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.events.removeAll()
+        queryParse()
+    }
+    
+    //format the date, save year, month, date --> string
+    func makeCurrentDateString() {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        selectedDate = formatter.stringFromDate(newDate)
+        print(selectedDate)
+    }
+    
+    func makeHourString(date: NSDate) -> String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "hh:mm a"
+        let hour = formatter.stringFromDate(date)
+        return hour
+    }
+    
     override func viewDidAppear(animated: Bool) {
         self.tableView.reloadData()
-        
     }
     
     //MARK:- UITableViewDataSource
@@ -48,15 +67,16 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
         cell.hourLabel.text = formatter.stringFromDate(hours[indexPath.row])
-       
-        print("cell date: \(hours[indexPath.row]) == event.date: \(self.event.date)")
-//        if (self.newDate == self.event.date){
         
-        if self.event.date != nil {
-            if (hours[indexPath.row].compare(self.event.date!) == NSComparisonResult.OrderedSame){
-                cell.detailsLabel.text = self.event.details
+        let hourString = makeHourString(hours[indexPath.row])
+        
+        for (key, value) in self.events {
+            if key == hourString {
+                cell.detailsLabel.text = value
+                print("key: \(key) hourString: \(hourString)")
             }
         }
+        
         return cell
     }
 
@@ -89,37 +109,32 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         if segue.identifier == "showDetailsVC" {
             let calendarDetailsVC = segue.destinationViewController as! CalendarDetailsViewController
             
-            calendarDetailsVC.delegate = self
-            
             //Get the cell that generated this segue.
             if let selectedHour = sender as? CalendarTableViewCell {
                 let indexPath = tableView.indexPathForCell(selectedHour)!
                 let hour = hours[indexPath.row]
                 calendarDetailsVC.hourDetails = hour
             }
+            
+            calendarDetailsVC.passSelectedDate = self.selectedDate
         }
     }
 
-    //MARK: CalendarDetailsDelegate
-    func getDetailsData(event: Event) {
-        self.event = event
-        print("\(self.event.ID)")
-        queryParse(event)
-    }
-    
-    func queryParse(event: Event) {
+    func queryParse() {
         let query = PFQuery(className:"Event")
-        query.whereKey("_id", equalTo: event.ID!)
+        if let selectedDate = self.selectedDate {
+            query.whereKey("date", equalTo: selectedDate)
+        }
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil && objects != nil {
                 for object in objects! {
-                    self.event.details = object["details"] as? String
-                    print(self.event.details)
-                    self.event.name = object["name"] as? String
-                    print(self.event.name)
-                    self.event.date = object["date"] as? NSDate
-                    self.tableView.reloadData()
+                    if let someHour = object["hourString"]{
+                    let hourString = someHour as! String
+                    let eventName = object["name"] as! String
+                    self.events[hourString] = eventName
+                    print(self.events)
+                    }
                 }
             } else {
                 print(error)

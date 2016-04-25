@@ -114,7 +114,6 @@
 				E285FD111CCAC71000C891F2 /* CollectionView */,
 				E285FD121CCAC72500C891F2 /* TableView */,
 				E20592971CC96F470042E162 /* CalendarViewController.swift */,
-				31400A871CCA830E0091EAFA /* CalendarDetailsViewController.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -177,6 +176,7 @@
 			children = (
 				31400A831CC97B280091EAFA /* CalendarTableViewController.swift */,
 				31400A851CC97BE50091EAFA /* CalendarTableViewCell.swift */,
+				31400A871CCA830E0091EAFA /* CalendarDetailsViewController.swift */,
 			);
 			name = TableView;
 			sourceTree = "<group>";

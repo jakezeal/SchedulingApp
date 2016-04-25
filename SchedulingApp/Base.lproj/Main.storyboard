@@ -219,31 +219,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSj-u7-888">
-                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSj-u7-888">
+                                                    <rect key="frame" x="8" y="11" width="85" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPR-Ie-peq">
-                                                    <rect key="frame" x="96" y="11" width="207" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPR-Ie-peq">
+                                                    <rect key="frame" x="101" y="11" width="202" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="leadingMargin" secondItem="mSj-u7-888" secondAttribute="leading" id="1hM-y9-7R9"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="mPR-Ie-peq" secondAttribute="trailing" constant="9" id="IZF-yG-NE3"/>
-                                                <constraint firstItem="mPR-Ie-peq" firstAttribute="leading" secondItem="Ne6-Rs-SlL" secondAttribute="leadingMargin" constant="88" id="Pyw-jS-WEl"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="mPR-Ie-peq" secondAttribute="bottom" constant="3" id="v2Q-xi-Rrq"/>
-                                                <constraint firstItem="mPR-Ie-peq" firstAttribute="top" secondItem="Ne6-Rs-SlL" secondAttribute="topMargin" constant="3" id="vDj-PL-XgG"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="detailsLabel" destination="mPR-Ie-peq" id="EBd-bl-rDk"/>
                                             <outlet property="hourLabel" destination="mSj-u7-888" id="sFK-Jy-smN"/>
-                                            <segue destination="jMQ-D9-Udf" kind="show" id="rDg-rE-OYi"/>
+                                            <segue destination="jMQ-D9-Udf" kind="show" identifier="showDetailsVC" id="rDg-rE-OYi"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

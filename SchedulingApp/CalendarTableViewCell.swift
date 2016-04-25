@@ -12,4 +12,6 @@ class CalendarTableViewCell: UITableViewCell {
 
     @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
+    
+    override func 
 }

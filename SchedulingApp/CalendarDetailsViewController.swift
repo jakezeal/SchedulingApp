@@ -9,10 +9,6 @@
 import UIKit
 import Parse
 
-protocol CalendarDetailsDelegate {
-    func getDetailsData(event: Event)
-}
-
 class CalendarDetailsViewController: UIViewController {
 
     @IBOutlet weak var eventName: UITextField!
@@ -20,10 +16,7 @@ class CalendarDetailsViewController: UIViewController {
     @IBOutlet weak var timeHeading: UILabel!
     
     var hourDetails = NSDate()
-    var delegate: CalendarDetailsDelegate?
-    var event = Event()
-//    var eventNameString: String?
-//    var eventDetailsString: String?
+    var passSelectedDate = String() //To associate month, day, and year with this event
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,22 +31,28 @@ class CalendarDetailsViewController: UIViewController {
         let e = PFObject(className:"Event")
         e["name"] = self.eventName.text
         e["details"] = self.eventDetails.text
-        e["date"] = self.hourDetails
+        e["hour"] = self.hourDetails
+        let hourString = makeHourString(self.hourDetails)
+        e["hourString"] = hourString
+        e["date"] = self.passSelectedDate
         
         e.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
                 print("Event saved.")
-                self.event.ID = e.objectId
-                print("\(self.event.ID)")
-                
-                dispatch_async(dispatch_get_main_queue(),{
-                    self.delegate?.getDetailsData(self.event)
-                })
+
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }
     }
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    func makeHourString(date: NSDate) -> String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "hh:mm a"
+        let hour = formatter.stringFromDate(date)
+        return hour
+    }
+    
 }
