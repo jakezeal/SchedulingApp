@@ -110,11 +110,10 @@
 		E20592961CC96F220042E162 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				E20592971CC96F470042E162 /* CalendarViewController.swift */,
 				E23E08B71CCA6AA400157A81 /* Create Calendar */,
 				E285FD111CCAC71000C891F2 /* CollectionView */,
-				E285FD121CCAC72500C891F2 /* TableView */,
-				E20592971CC96F470042E162 /* CalendarViewController.swift */,
-				31400A871CCA830E0091EAFA /* CalendarDetailsViewController.swift */,
+				E285FD121CCAC72500C891F2 /* Events */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -172,13 +171,14 @@
 			name = CollectionView;
 			sourceTree = "<group>";
 		};
-		E285FD121CCAC72500C891F2 /* TableView */ = {
+		E285FD121CCAC72500C891F2 /* Events */ = {
 			isa = PBXGroup;
 			children = (
 				31400A831CC97B280091EAFA /* CalendarTableViewController.swift */,
 				31400A851CC97BE50091EAFA /* CalendarTableViewCell.swift */,
+				31400A871CCA830E0091EAFA /* CalendarDetailsViewController.swift */,
 			);
-			name = TableView;
+			name = Events;
 			sourceTree = "<group>";
 		};
 		E285FD131CCAC73600C891F2 /* Modal Objects */ = {

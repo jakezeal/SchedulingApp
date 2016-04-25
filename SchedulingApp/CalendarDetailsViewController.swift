@@ -44,8 +44,8 @@ class CalendarDetailsViewController: UIViewController {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
                 print("Event saved.")
-                self.event.ID = e.objectId
-                print("\(self.event.ID)")
+                self.event.id = e.objectId
+                print("\(self.event.id)")
                 
                 dispatch_async(dispatch_get_main_queue(),{
                     self.delegate?.getDetailsData(self.event)

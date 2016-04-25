@@ -11,6 +11,6 @@ import Foundation
 class Event {
     var name: String?
     var details: String?
-    var ID: String?
+    var id: String?
     var date: NSDate?
 }

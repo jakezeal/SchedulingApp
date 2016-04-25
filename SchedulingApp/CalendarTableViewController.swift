@@ -15,7 +15,8 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     var newDate = NSDate()
     var hours: [NSDate] = []
     var event = Event()
-//    var eventIDs: [String] = []
+    var events = [Event]()
+//    var eventIds: [String] = []
     
     //MARK:- Outlets
     @IBOutlet weak var dateLabel: UILabel!
@@ -44,17 +45,20 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CalendarTableViewCell
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 40
+        
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
         cell.hourLabel.text = formatter.stringFromDate(hours[indexPath.row])
-       
-        print("cell date: \(hours[indexPath.row]) == event.date: \(self.event.date)")
-//        if (self.newDate == self.event.date){
         
         if self.event.date != nil {
-            if (hours[indexPath.row].compare(self.event.date!) == NSComparisonResult.OrderedSame){
-                cell.detailsLabel.text = self.event.details
+            for singleEvent in self.events {
+                if (hours[indexPath.row].compare(singleEvent.date!) == NSComparisonResult.OrderedSame) {
+                cell.eventTitle.text = singleEvent.name
+                cell.eventDetails.text = singleEvent.details
+                }
             }
         }
         return cell
@@ -101,15 +105,21 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     //MARK: CalendarDetailsDelegate
+    
+    
+    
+    
     func getDetailsData(event: Event) {
+        self.events.append(event)
+        
         self.event = event
-        print("\(self.event.ID)")
+        print("\(self.event.id)")
         queryParse(event)
     }
     
     func queryParse(event: Event) {
         let query = PFQuery(className:"Event")
-        query.whereKey("_id", equalTo: event.ID!)
+        query.whereKey("_id", equalTo: event.id!)
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil && objects != nil {
