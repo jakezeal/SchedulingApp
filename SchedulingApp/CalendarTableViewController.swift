@@ -75,7 +75,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         
         for (key, value) in self.events {
             if key == hourString {
-                cell.detailsLabel.text = value
+                cell.eventDetails.text = value
                 print("key: \(key) hourString: \(hourString)")
                 
             }
@@ -125,7 +125,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     
-    func queryParse(event: Event) {
+    func queryParse() {
         let query = PFQuery(className:"Event")
         if let selectedDate = self.selectedDate {
             query.whereKey("date", equalTo: selectedDate)
@@ -136,10 +136,10 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
             if error == nil && objects != nil {
                 for object in objects! {
                     if let someHour = object["hourString"]{
-                    let hourString = someHour as! String
-                    let eventName = object["name"] as! String
-                    self.events[hourString] = eventName
-                    print(self.events)
+                        let hourString = someHour as! String
+                        let eventName = object["name"] as! String
+                        self.events[hourString] = eventName
+                        print(self.events)
                     }
                 }
             } else {

@@ -13,5 +13,4 @@ class Event {
     var details: String?
     var date: String?
     var hour: NSDate?
-    var id: String?
 }

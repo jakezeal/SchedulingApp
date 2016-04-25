@@ -234,7 +234,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="detailsLabel" destination="mPR-Ie-peq" id="EBd-bl-rDk"/>
+                                            <outlet property="eventDetails" destination="mPR-Ie-peq" id="aBR-cr-NvJ"/>
                                             <outlet property="hourLabel" destination="mSj-u7-888" id="sFK-Jy-smN"/>
                                             <segue destination="jMQ-D9-Udf" kind="show" identifier="showDetailsVC" id="rDg-rE-OYi"/>
                                         </connections>
