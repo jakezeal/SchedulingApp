@@ -11,7 +11,6 @@ import Parse
 
 class CalendarCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    var imageView = UIImageView()
     var calendarNames: [String] = []
     
     //MARK:- Outlets
@@ -71,9 +70,8 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         let cellIdentifier = "Cell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! CalendarCollectionViewCell
         
-        self.imageView.frame = cell.frame
-        cell.addSubview(self.imageView)
-        self.imageView.image = UIImage.init(named:"calendar")
+        cell.calendarImage.image = UIImage.init(named: "calendar")
+        cell.groupLabel.text = calendarNames[indexPath.row]
         
         return cell
     }
