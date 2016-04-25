@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Parse
 
 class AddMembersToCalendarViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
     
     // MARK:- Properties
     var userExists:Bool!
     var users:[User] = []
+    var usernames:[String] = []
     
     // MARK:- Outlets
     @IBOutlet weak var calendarTextField: UITextField!
@@ -69,7 +71,10 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
             let user = User()
             user.name = self.userTextField.text!
             self.users.insert(user,atIndex:0)
+            //make an array of usernames at same time
+            self.usernames.append(user.name!)
             self.tableView.reloadData()
+            self.userTextField.text = ""
         } else {
             let alertController = UIAlertController(title: "User does not exist!", message: "Please check spelling and try again", preferredStyle: .Alert)
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -104,5 +109,22 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     
     func saveCalendar() {
         // Save calendar name, users associated with it and 0 events.
+        let cal = PFObject(className:"Calendar")
+        cal["title"] = self.calendarTextField.text
+        cal["usernames"] = self.usernames
+        
+        cal.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                print("Users saved.")
+                print(cal["usernames"])
+                
+//                dispatch_async(dispatch_get_main_queue(),{
+//                    
+//                })
+            } else {
+                print("Error ==>>> \(error?.localizedDescription)")
+            }
+        }
     }
 }

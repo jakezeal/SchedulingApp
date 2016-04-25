@@ -18,14 +18,17 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     //MARK:- Outlets
     @IBOutlet weak var calendar: FSCalendar!
     
+    //MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.didOpenCalendar = true
         
-        calendar.scrollDirection = .Vertical
+        calendar.scrollDirection = .Horizontal
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
-        calendar.selectDate(calendar.dateWithYear(2015, month: 10, day: 10))
+        calendar.selectDate(date)
+        
+        
         //        calendar.allowsMultipleSelection = true
         
         // Uncomment this to test month->week and week->month transition
@@ -42,16 +45,17 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     
     func minimumDateForCalendar(calendar: FSCalendar) -> NSDate {
-        return calendar.dateWithYear(2015, month: 1, day: 1)
+        return calendar.dateWithYear(2016, month: 1, day: 1)
     }
     
     func maximumDateForCalendar(calendar: FSCalendar) -> NSDate {
-        return calendar.dateWithYear(2016, month: 10, day: 31)
+        return calendar.dateWithYear(2017, month: 12, day: 31)
     }
     
     func calendar(calendar: FSCalendar, numberOfEventsForDate date: NSDate) -> Int {
-        let day = calendar.dayOfDate(date)
-        return day % 5 == 0 ? day/5 : 0;
+//        let day = calendar.dayOfDate(date)
+//        return day % 5 == 0 ? day/5 : 0;
+        return 0
     }
     
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
