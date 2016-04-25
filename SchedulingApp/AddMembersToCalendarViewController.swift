@@ -40,6 +40,7 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     
     @IBAction func saveCalendar(sender: UIBarButtonItem) {
         saveCalendar()
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     // MARK:- UITableViewDataSource
@@ -126,5 +127,5 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
                 print("Error ==>>> \(error?.localizedDescription)")
             }
         }
-    }
+}
 }
