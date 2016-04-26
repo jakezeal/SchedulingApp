@@ -71,7 +71,9 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         let cellIdentifier = "Cell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! CalendarCollectionViewCell
         
-        cell.calendarImage.image = UIImage.init(named: "calendar")
+        cell.calendarImage.image = UIImage(named: "calendar")
+        cell.calendarImage.contentMode = .ScaleAspectFill
+        cell.calendarImage.clipsToBounds = true
         cell.groupLabel.text = calendarNames[indexPath.row]
         
         return cell

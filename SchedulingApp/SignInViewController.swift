@@ -26,8 +26,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var errorLabel: UILabel!
-    
     @IBOutlet weak var loginButton: UIButton!
     
     // MARK:- Lifecycles

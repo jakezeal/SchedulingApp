@@ -28,7 +28,7 @@ class WelcomeViewController : UIViewController {
     }
     
     func prepareImageView() {
-        self.imageView.image = UIImage.init(named: "CalendarIcon")
+        self.imageView.image = UIImage.init(named: "Calendar-1")
     }
     
     //MARK:- Actions

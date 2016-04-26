@@ -14,5 +14,11 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var groupLabel: UILabel!
     
     @IBOutlet weak var calendarImage: UIImageView!
+ 
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        layer.borderColor = UIColor.blueColor().colorWithAlphaComponent(0.6).CGColor
+        layer.borderWidth = 1.0
+    }
 }

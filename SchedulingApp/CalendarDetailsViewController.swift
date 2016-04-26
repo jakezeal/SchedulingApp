@@ -22,9 +22,11 @@ class CalendarDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        self.navigationController?.navigationBar.titleTextAttributes = UIColor.init(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
+        
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
-        formatter.dateFormat = "MMM d, yyyy hh:mm a z"
+        formatter.dateFormat = "MMM d, yyyy hh:mm a"
         self.timeHeading.text = formatter.stringFromDate(hourDetails)
     }
 
