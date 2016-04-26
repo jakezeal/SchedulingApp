@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class CalendarDetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var eventName: UITextField!
     @IBOutlet weak var eventDetailsTextView: UITextView!
     @IBOutlet weak var timeHeading: UILabel!
@@ -47,7 +47,7 @@ class CalendarDetailsViewController: UIViewController {
         e.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-               // print("Event saved.")
+                // print("Event saved.")
                 
                 let relation = self.calendarObject?.relationForKey("events")
                 relation?.addObject(e)
@@ -55,8 +55,10 @@ class CalendarDetailsViewController: UIViewController {
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }
-    }
-        self.navigationController?.popViewControllerAnimated(true)
+            //EITHER DELEGATE OR TURN OFF CACHE AND RELOAD
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        
     }
     
     func makeHourString(date: NSDate) -> String {

@@ -14,7 +14,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     //MARK:- Properties
     var newDate = NSDate()
     var hours: [NSDate] = []
-    var events = [String: String]()
+    var events = [String: [String]]()
     var selectedDate: String!
     var calendarObject: PFObject?
     
@@ -28,14 +28,11 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         self.hours.append(newDate)
         makeCurrentDateString()
         makeHoursArray()
-        //formatDateLabel()
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         self.events.removeAll()
         queryParse()
-
     }
     
     //format the date, save year, month, date --> string
@@ -63,6 +60,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CalendarTableViewCell
         
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -77,12 +75,10 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         
         for (key, value) in self.events {
             if key == hourString {
-                cell.eventDetails.text = value
-                //print("key: \(key) hourString: \(hourString)")
-                
+                cell.eventName.text = value[0]
+                cell.eventDetails.text = value[1]
             }
         }
-        
         return cell
     }
     
@@ -91,8 +87,6 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
-        //print("Date: \(formatter.stringFromDate(hours[indexPath.row]))")
-        //print("Read date: \(hours[indexPath.row])")
     }
     
     //MARK:- Helpers
@@ -150,8 +144,10 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
                     if let someHour = object["hourString"]{
                         let hourString = someHour as! String
                         let eventName = object["name"] as! String
-                        self.events[hourString] = eventName
-                        //print(self.events)
+                        let eventDetails = object["details"] as! String
+                        self.events[hourString] = [eventName, eventDetails]
+//                        self.events[hourString] = [eventDetails]
+                        self.tableView.reloadData()
                     }
                 }
             } else {
