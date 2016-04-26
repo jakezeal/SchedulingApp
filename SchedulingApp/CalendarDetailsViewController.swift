@@ -18,9 +18,19 @@ class CalendarDetailsViewController: UIViewController {
     var hourDetails = NSDate()
     var passSelectedDate = String() //To associate month, day, and year with this event
     var calendarObject: PFObject?
+    var eventObject: PFObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let event = eventObject{
+        let eventName = event["name"] as! String
+        let eventDetails = event["details"] as! String
+        //  self.events[hourString] = eventName
+        
+        self.eventName.text = eventName
+        self.eventDetailsTextView.text = eventDetails
+        }
+
         
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
@@ -29,6 +39,38 @@ class CalendarDetailsViewController: UIViewController {
         getCalendarName()
     }
     
+    func lookForEventDetails(){
+        let relation = calendarObject!.relationForKey("events")
+        let query = relation.query()
+        
+            query.whereKey("date", equalTo: self.passSelectedDate)
+            //query.whereKey("hour", equalTo: self.hourDetails)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil && objects != nil {
+                for object in objects! {
+                        //let hourString = object["hourString"] as! String
+                        let eventName = object["name"] as! String
+                        let eventDetails = object["details"] as! String
+                      //  self.events[hourString] = eventName
+
+                        self.eventName.text = eventName
+                        self.eventDetailsTextView.text = eventDetails
+
+                      //  self.events[hourString] = eventName
+                        //print(self.events)
+                }
+            } else {
+                print(error)
+            }
+        }
+    }
+    
+ 
+        
+
+
     func getCalendarName() {
         
     }

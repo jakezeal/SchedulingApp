@@ -14,7 +14,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     //MARK:- Properties
     var newDate = NSDate()
     var hours: [NSDate] = []
-    var events = [String: String]()
+    var events = [String: PFObject]()
     var selectedDate: String!
     var calendarObject: PFObject?
     
@@ -75,13 +75,17 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         
         let hourString = makeHourString(hours[indexPath.row])
         
-        for (key, value) in self.events {
-            if key == hourString {
-                cell.eventDetails.text = value
-                //print("key: \(key) hourString: \(hourString)")
-                
-            }
+        if let someEvent = self.events[hourString]{
+        cell.eventDetails.text = someEvent["name"] as? String
         }
+        
+//        for (key, value) in self.events {
+//            if key == hourString {
+//                cell.eventDetails.text =
+//                //print("key: \(key) hourString: \(hourString)")
+//                
+//            }
+//
         
         return cell
     }
@@ -126,11 +130,16 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
             //Get the cell that generated this segue.
             if let selectedHour = sender as? CalendarTableViewCell {
                 let indexPath = tableView.indexPathForCell(selectedHour)!
+                let hourString = makeHourString(hours[indexPath.row])
+                let event = self.events[hourString]
+                calendarDetailsVC.eventObject = event
+
                 let hour = hours[indexPath.row]
                 calendarDetailsVC.hourDetails = hour
             }
             calendarDetailsVC.passSelectedDate = self.selectedDate
             calendarDetailsVC.calendarObject = self.calendarObject
+
         }
     }
     
@@ -149,8 +158,8 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
                 for object in objects! {
                     if let someHour = object["hourString"]{
                         let hourString = someHour as! String
-                        let eventName = object["name"] as! String
-                        self.events[hourString] = eventName
+                        //let eventName = object["name"] as! String
+                        self.events[hourString] = object
                         //print(self.events)
                     }
                 }
