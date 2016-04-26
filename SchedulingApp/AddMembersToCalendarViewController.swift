@@ -15,6 +15,8 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     var userExists:Bool!
     var users:[User] = []
     var usernames:[String] = []
+    var cal = PFObject(className:"Calendar")
+
     
     // MARK:- Outlets
     @IBOutlet weak var calendarTextField: UITextField!
@@ -25,6 +27,40 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTableView()
+        showAlert()
+    }
+    func showAlert(){
+        let alertController = UIAlertController(title: "Create Calendar", message: "Enter a name for your calendar", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        
+        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            let calendarName = alertController.textFields![0] as UITextField
+            self.cal["title"] = calendarName.text
+            self.title = calendarName.text
+
+
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            self.navigationController?.popViewControllerAnimated(true)
+
+            
+            
+        })
+        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            textField.placeholder = "Calendar name"
+        }
+
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+
+
+
+
+        
     }
     
     // MARK:- Preperations
@@ -114,15 +150,14 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     
     func saveCalendar() {
         // Save calendar name, users associated with it and 0 events.
-        let cal = PFObject(className:"Calendar")
-        cal["title"] = self.calendarTextField.text
-        cal["usernames"] = self.usernames
+        //let cal = PFObject(className:"Calendar")
+        self.cal["usernames"] = self.usernames
         
         cal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
                 //print("Users saved.")
-                print(cal["usernames"])
+                print(self.cal["usernames"])
                 
                 //dispatch_async(dispatch_get_main_queue(),{
                 //
