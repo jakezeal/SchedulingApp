@@ -13,6 +13,8 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
 
     var calendarNames: [String] = []
     var calendars: [PFObject] = []
+    var refreshControl: UIRefreshControl!
+
     
     //MARK:- Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -20,8 +22,18 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     //MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         prepareCollectionView()
+       
+       // refreshControl = UIRefreshControl()
+        //refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        //refreshControl.addTarget(self, action: #selector(CalendarCollectionViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        //self.collectionView.addSubview(refreshControl) // not required when using UITableViewController
     }
+//    func refresh(sender:AnyObject) {
+//        collectionView.reloadData()
+//        refreshControl.endRefreshing()
+//    }
     
     override func viewWillAppear(animated: Bool) {
         //query parse for user-specific calendars
