@@ -14,12 +14,12 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     //MARK:- Properties
     var didOpenCalendar: Bool!
-    var date = NSDate()
+    var selectedDate = NSDate()
     var dateString: String?
     var calendarObject: PFObject?
     var membersArray:[String] = []
-    var calendarDaysArray:[String] = []
     var calendarDaysDict = [String:Int]()
+    
     
     //MARK:- Outlets
     @IBOutlet weak var calendar: FSCalendar!
@@ -30,16 +30,15 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         super.viewDidLoad()
         membersTableView.delegate = self
         membersTableView.dataSource = self
+        self.title = calendarObject!["title"] as? String
+
 
         self.didOpenCalendar = true
         
         calendar.scrollDirection = .Horizontal
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
-        calendar.selectDate(date)
-        makeDaysArray(self.date)
-        makeDaysDictionary()
-        
-        //        calendar.allowsMultipleSelection = true
+        calendar.selectDate(NSDate())
+
         
         // Uncomment this to test month->week and week->month transition
         /*
@@ -51,27 +50,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
          }
          */
         
-    }
-    
-    func makeDaysArray(date: NSDate) {
-        let firstOfMonth = calendar.beginingOfMonthOfDate(date)
-        
-        let daysInMonth = calendar.numberOfDatesInMonthOfDate(date)
-        let interval: Double = 86400 //seconds per 24 hours
-        for day in 0..<daysInMonth {
-            let nextDay = firstOfMonth.dateByAddingTimeInterval(interval*Double(day))
-            let nextDayString = formatDateString(nextDay)
-            self.calendarDaysArray.append(nextDayString)
-        }
-//        print(self.calendarDaysArray)
-    }
-    
-    func makeDaysDictionary() {
-        //initialize a dictionary with dayStrings as keys, and 0 as values, i.e. the initial count of events per day
-        for dayString in self.calendarDaysArray {
-            self.calendarDaysDict[dayString] = 0
-        }
-//        print(self.calendarDaysDict)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -89,22 +67,18 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func calendar(calendar: FSCalendar, numberOfEventsForDate date: NSDate) -> Int {
-        if calendar.monthOfDate(date) == calendar.monthOfDate(self.date) &&
-            calendar.yearOfDate(date) == calendar.yearOfDate(self.date) {
-            
-            let dayIndex = calendar.dayOfDate(date) - 1
-            
-            if dayIndex < self.calendarDaysArray.count {
-                let dateString = self.calendarDaysArray[dayIndex]
-                if let eventCount = self.calendarDaysDict[dateString] {
-                    if eventCount > 3 {
-                        return 3
-                    } else {
-                        return eventCount
-                    }
-                }
+
+        let dateString = formatDateString(date)
+
+        if let eventCount = self.calendarDaysDict[dateString] {
+            if eventCount > 3 {
+                return 3
+            } else {
+                return eventCount
             }
         }
+
+        
         return 0
     }
 
@@ -127,12 +101,16 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 
                     if let eventDateString = object["dateString"] as? String {
                         if let eventCount = self.calendarDaysDict[eventDateString] {
-                            // self.calendarDaysDict["April 16, 2016"]!, which equals 0 intiially
+
                             self.calendarDaysDict[eventDateString] = eventCount + 1
+                            
+                        } else {
+                            
+                            self.calendarDaysDict[eventDateString] = 1
                         }
                     }
                 }
-//                print(self.calendarDaysDict)
+               print(self.calendarDaysDict)
                 self.calendar.reloadData()
             } else {
                 print(error)
@@ -142,18 +120,12 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
         NSLog("change page to \(calendar.stringFromDate(calendar.currentPage))")
-        //if change page --> generate new array, requery parse?
-//        self.calendarDaysArray.removeAll()
-//        makeDaysArray(calendar.currentPage)
-//        self.calendarDaysDict.removeAll()
-//        makeDaysDictionary()
-//        queryParse()
     }
     
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
         if (didOpenCalendar == false){
             //NSLog("calendar did select date \(calendar.stringFromDate(date))")
-            self.date = date
+            self.selectedDate = date
             performSegueWithIdentifier("showCalendarTableView", sender: nil)
         } else if (didOpenCalendar == true) {
             didOpenCalendar = false
@@ -164,7 +136,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         if segue.identifier == "showCalendarTableView" {
             let nextVC = segue.destinationViewController as! CalendarTableViewController
-            nextVC.newDate = date
+            nextVC.newDate = selectedDate
             nextVC.calendarObject = self.calendarObject
         }
     }
