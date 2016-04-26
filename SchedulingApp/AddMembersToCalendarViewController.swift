@@ -117,7 +117,7 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
         cal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                print("Users saved.")
+                //print("Users saved.")
                 print(cal["usernames"])
                 
                 //                dispatch_async(dispatch_get_main_queue(),{

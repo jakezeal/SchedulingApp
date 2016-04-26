@@ -66,7 +66,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
         if (didOpenCalendar == false){
-            NSLog("calendar did select date \(calendar.stringFromDate(date))")
+            //NSLog("calendar did select date \(calendar.stringFromDate(date))")
             self.date = date
             performSegueWithIdentifier("showCalendarTableView", sender: nil)
         } else if (didOpenCalendar == true) {

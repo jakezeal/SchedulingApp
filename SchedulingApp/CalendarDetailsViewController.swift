@@ -12,7 +12,7 @@ import Parse
 class CalendarDetailsViewController: UIViewController {
 
     @IBOutlet weak var eventName: UITextField!
-    @IBOutlet weak var eventDetails: UITextField!
+    @IBOutlet weak var eventDetailsTextView: UITextView!
     @IBOutlet weak var timeHeading: UILabel!
     
     var hourDetails = NSDate()
@@ -36,7 +36,7 @@ class CalendarDetailsViewController: UIViewController {
     @IBAction func saveDetails(sender: UIBarButtonItem) {
         let e = PFObject(className:"Event")
         e["name"] = self.eventName.text
-        e["details"] = self.eventDetails.text
+        e["details"] = self.eventDetailsTextView.text
         e["hour"] = self.hourDetails
         let hourString = makeHourString(self.hourDetails)
         e["hourString"] = hourString
@@ -47,7 +47,7 @@ class CalendarDetailsViewController: UIViewController {
         e.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                print("Event saved.")
+               // print("Event saved.")
                 
                 let relation = self.calendarObject?.relationForKey("events")
                 relation?.addObject(e)

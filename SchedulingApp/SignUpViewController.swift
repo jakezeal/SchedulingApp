@@ -55,6 +55,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         if !(username ?? "").isEmpty && !(password ?? "").isEmpty {
             userSignup(username!, password: password!, isTrainer: isTrainer)
+            //self.navigationController?.popViewControllerAnimated(true)
+
         } else {
             showAlert()
         }
