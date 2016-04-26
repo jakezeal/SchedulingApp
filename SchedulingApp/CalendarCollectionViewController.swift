@@ -78,7 +78,6 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //pass over the calendar name
         
         if segue.identifier == "showCalendar" {
             let calendarVC = segue.destinationViewController as! CalendarViewController

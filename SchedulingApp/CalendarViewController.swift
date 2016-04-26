@@ -2,7 +2,7 @@
 //  CalendarViewController.swift
 //  SchedulingApp
 //
-//  Created by Zeal on 4/21/16.
+//  Created by Jake, JP, Jeff on 4/21/16.
 //  Copyright © 2016 Jake Zeal. All rights reserved.
 //
 
@@ -15,8 +15,10 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     //MARK:- Properties
     var didOpenCalendar: Bool!
     var date = NSDate()
+    var dateString: String?
     var calendarObject: PFObject?
     var membersArray:[String] = []
+    var calendarDaysArray:[String] = []
     
     //MARK:- Outlets
     @IBOutlet weak var calendar: FSCalendar!
@@ -29,8 +31,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         membersTableView.delegate = self
         membersTableView.dataSource = self
 
-        
-
 //        for calendar with title = calendar title
 //        print(cal["usernames"])
 
@@ -40,7 +40,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.scrollDirection = .Horizontal
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
         calendar.selectDate(date)
-        
+        makeDaysArray()
         
         //        calendar.allowsMultipleSelection = true
         
@@ -54,6 +54,19 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
          }
          */
         
+    }
+    
+    func makeDaysArray() {
+        let firstOfMonth = calendar.beginingOfMonthOfDate(date)
+        
+        let daysInMonth = calendar.numberOfDatesInMonthOfDate(date)
+        let interval: Double = 86400 //seconds per 24 hours
+        for day in 1..<daysInMonth {
+            let nextDay = firstOfMonth.dateByAddingTimeInterval(interval*Double(day))
+            let nextDayString = formatDateString(nextDay)
+            self.calendarDaysArray.append(nextDayString)
+        }
+        print(self.calendarDaysArray)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,13 +84,53 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func calendar(calendar: FSCalendar, numberOfEventsForDate date: NSDate) -> Int {
-//        let day = calendar.dayOfDate(date)
-//        return day % 5 == 0 ? day/5 : 0;
+        //format the date
+
+        //need a count of number of days in month
+        
+
+        
+        //need the number of events per day per calendar (display maximum 3 dots)
+        //if event exists on that day, show 1 dot, to max 3 dots, else show none
+        //query parse, find that "Month Day, Year" string; match all events for that string -- count +1
+        
+        
         return 0
     }
+
+    
+    func formatDateString(date: NSDate) -> String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        let dateString: String = formatter.stringFromDate(date)
+        return dateString
+    }
+
+    //Query Parse for events
+//    func queryParse() {
+//        let relation = calendarObject!.relationForKey("events")
+//        let query = relation.query()
+//        
+//        query.findObjectsInBackgroundWithBlock {
+//            (objects: [PFObject]?, error: NSError?) -> Void in
+//            if error == nil && objects != nil {
+//                for object in objects! {
+//                    if let someHour = object["hourString"]{
+//                        let hourString = someHour as! String
+//                        let eventName = object["name"] as! String
+//                        self.events[hourString] = eventName
+//                        //print(self.events)
+//                    }
+//                }
+//            } else {
+//                print(error)
+//            }
+//        }
+//    }
     
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
         NSLog("change page to \(calendar.stringFromDate(calendar.currentPage))")
+        //if change page --> generate new array, requery parse?
     }
     
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {

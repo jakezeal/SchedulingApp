@@ -39,8 +39,8 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     func makeCurrentDateString() {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MMM d, yyyy"
-        selectedDate = formatter.stringFromDate(newDate)
-        print(selectedDate)
+        self.selectedDate = formatter.stringFromDate(newDate)
+        print(self.selectedDate)
     }
     
     func makeHourString(date: NSDate) -> String {
@@ -133,7 +133,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         let query = relation.query()
         
         if let selectedDate = self.selectedDate {
-            query.whereKey("date", equalTo: selectedDate)
+            query.whereKey("dateString", equalTo: selectedDate)
 
         }
         
