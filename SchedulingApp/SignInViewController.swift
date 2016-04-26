@@ -35,6 +35,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         preparePasswordSignIn()
     }
     
+    override func awakeFromNib() {
+        
+    }
+    
     // MARK:- Preparations
     func preparePasswordSignIn() {
         self.passwordTextField.secureTextEntry = true
@@ -58,15 +62,29 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK:- Segues
-        func segueToCalendarCollectionViewController() {
-            performSegueWithIdentifier("CalendarCollectionViewController", sender: nil)
-        }
+    func segueToCalendarCollectionViewController() {
+        performSegueWithIdentifier("CalendarCollectionViewController", sender: nil)
+    }
     
     // MARK:- Helpers
     
     func setupTextFields() {
         usernameTextField.delegate = self
         passwordTextField.delegate = self
+        
+        usernameTextField.leftViewMode = .Always
+        let imageView = UIImageView(image: UIImage(named: "Envelope"))
+        
+        imageView.contentMode = UIViewContentMode.Center
+        imageView.frame = CGRectMake(0.0, 0.0, imageView.image!.size.width + 20.0, imageView.image!.size.height)
+        usernameTextField.leftView = imageView
+        
+        passwordTextField.leftViewMode = .Always
+        let imageView2 = UIImageView(image: UIImage(named: "Lock"))
+        
+        imageView2.contentMode = UIViewContentMode.Center
+        imageView2.frame = CGRectMake(0.0, 0.0, imageView2.image!.size.width + 20.0, imageView2.image!.size.height)
+        passwordTextField.leftView = imageView2
     }
     
     func userSignIn(username: String, password: String) {
