@@ -16,6 +16,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     var hours: [NSDate] = []
     var events = [String: String]()
     var selectedDate: String!
+    var calendarObject: PFObject?
     
     //MARK:- Outlets
     @IBOutlet weak var dateLabel: UILabel!
@@ -119,16 +120,18 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
                 let hour = hours[indexPath.row]
                 calendarDetailsVC.hourDetails = hour
             }
-            
             calendarDetailsVC.passSelectedDate = self.selectedDate
+            calendarDetailsVC.calendarObject = self.calendarObject
         }
     }
     
-    
     func queryParse() {
-        let query = PFQuery(className:"Event")
+        let relation = calendarObject!.relationForKey("events")
+        let query = relation.query()
+        
         if let selectedDate = self.selectedDate {
             query.whereKey("date", equalTo: selectedDate)
+
         }
         
         query.findObjectsInBackgroundWithBlock {

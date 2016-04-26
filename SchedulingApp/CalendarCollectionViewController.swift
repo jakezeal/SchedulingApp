@@ -12,6 +12,7 @@ import Parse
 class CalendarCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var calendarNames: [String] = []
+    var calendars: [PFObject] = []
     
     //MARK:- Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -40,10 +41,10 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
                     let calendarTitle = object["title"] as! String
                     self.calendarNames.append(calendarTitle)
                     print(self.calendarNames)
-                    dispatch_async(dispatch_get_main_queue()){
-                        self.collectionView.reloadData()
- 
-                    }
+                }
+                dispatch_async(dispatch_get_main_queue()){
+                    self.collectionView.reloadData()
+                    self.calendars = objects!
                 }
             } else {
                 print(error)
@@ -75,6 +76,20 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         
         return cell
     }
-
-
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //pass over the calendar name
+        
+        if segue.identifier == "showCalendar" {
+            let calendarVC = segue.destinationViewController as! CalendarViewController
+            
+            //Get the cell that generated this segue.
+            if let selectedCell = sender as? CalendarCollectionViewCell {
+                let indexPath = collectionView.indexPathForCell(selectedCell)!
+                calendarVC.calendarObject = calendars[indexPath.row]
+            }
+            
+        }
+    }
+    
 }

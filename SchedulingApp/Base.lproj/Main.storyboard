@@ -399,7 +399,7 @@
                                         <connections>
                                             <outlet property="calendarImage" destination="wCS-tn-rwz" id="tn6-lj-oab"/>
                                             <outlet property="groupLabel" destination="XJQ-D3-Dis" id="6Ui-a7-ThC"/>
-                                            <segue destination="epc-cV-Pr7" kind="show" id="iEP-cJ-1hs"/>
+                                            <segue destination="epc-cV-Pr7" kind="show" identifier="showCalendar" id="iEP-cJ-1hs"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

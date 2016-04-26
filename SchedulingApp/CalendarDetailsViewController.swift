@@ -17,6 +17,7 @@ class CalendarDetailsViewController: UIViewController {
     
     var hourDetails = NSDate()
     var passSelectedDate = String() //To associate month, day, and year with this event
+    var calendarObject: PFObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,11 @@ class CalendarDetailsViewController: UIViewController {
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "MMM d, yyyy hh:mm a z"
         self.timeHeading.text = formatter.stringFromDate(hourDetails)
+        getCalendarName()
+    }
+    
+    func getCalendarName() {
+        
     }
     
     @IBAction func saveDetails(sender: UIBarButtonItem) {
@@ -36,10 +42,16 @@ class CalendarDetailsViewController: UIViewController {
         e["hourString"] = hourString
         e["date"] = self.passSelectedDate
         
+        //establish relation with calendar
+        
         e.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
                 print("Event saved.")
+                
+                let relation = self.calendarObject?.relationForKey("events")
+                relation?.addObject(e)
+                self.calendarObject!.saveInBackground()
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }

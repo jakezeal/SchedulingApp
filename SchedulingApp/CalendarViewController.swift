@@ -8,12 +8,14 @@
 
 import UIKit
 import FSCalendar
+import Parse
 
 class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
     //MARK:- Properties
     var didOpenCalendar: Bool!
     var date = NSDate()
+    var calendarObject: PFObject?
     
     //MARK:- Outlets
     @IBOutlet weak var calendar: FSCalendar!
@@ -73,8 +75,12 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let nextVC = segue.destinationViewController as! CalendarTableViewController
-        nextVC.newDate = date
+        
+        if segue.identifier == "showCalendarTableView" {
+            let nextVC = segue.destinationViewController as! CalendarTableViewController
+            nextVC.newDate = date
+            nextVC.calendarObject = self.calendarObject
+        }
     }
     
 }
