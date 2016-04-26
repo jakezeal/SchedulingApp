@@ -20,6 +20,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     var membersArray:[String] = []
     var calendarDaysDict = [String:Int]()
     
+    
     //MARK:- Outlets
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var membersTableView: UITableView!
@@ -29,6 +30,8 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         super.viewDidLoad()
         membersTableView.delegate = self
         membersTableView.dataSource = self
+        self.title = calendarObject!["title"] as? String
+
 
         self.didOpenCalendar = true
         
