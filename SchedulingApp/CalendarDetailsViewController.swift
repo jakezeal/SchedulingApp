@@ -18,9 +18,19 @@ class CalendarDetailsViewController: UIViewController {
     var hourDetails = NSDate()
     var passSelectedDate = String() //To associate month, day, and year with this event
     var calendarObject: PFObject?
+    var eventObject: PFObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let event = eventObject{
+        let eventName = event["name"] as! String
+        let eventDetails = event["details"] as! String
+        //  self.events[hourString] = eventName
+        
+        self.eventName.text = eventName
+        self.eventDetailsTextView.text = eventDetails
+        }
+
         
 //        self.navigationController?.navigationBar.titleTextAttributes = UIColor.init(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
         

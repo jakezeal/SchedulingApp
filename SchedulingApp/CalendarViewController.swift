@@ -19,10 +19,10 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     var calendarObject: PFObject?
     var membersArray:[String] = []
     var calendarDaysArray:[String] = []
+    var calendarDaysDict = [String:Int]()
     
     //MARK:- Outlets
     @IBOutlet weak var calendar: FSCalendar!
-    
     @IBOutlet weak var membersTableView: UITableView!
     
     //MARK:- Lifecycles
@@ -31,16 +31,13 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         membersTableView.delegate = self
         membersTableView.dataSource = self
 
-//        for calendar with title = calendar title
-//        print(cal["usernames"])
-
-        
         self.didOpenCalendar = true
         
         calendar.scrollDirection = .Horizontal
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
         calendar.selectDate(date)
-        makeDaysArray()
+        makeDaysArray(self.date)
+        makeDaysDictionary()
         
         //        calendar.allowsMultipleSelection = true
         
@@ -56,24 +53,32 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
     }
     
-    func makeDaysArray() {
+    func makeDaysArray(date: NSDate) {
         let firstOfMonth = calendar.beginingOfMonthOfDate(date)
         
         let daysInMonth = calendar.numberOfDatesInMonthOfDate(date)
         let interval: Double = 86400 //seconds per 24 hours
-        for day in 1..<daysInMonth {
+        for day in 0..<daysInMonth {
             let nextDay = firstOfMonth.dateByAddingTimeInterval(interval*Double(day))
             let nextDayString = formatDateString(nextDay)
             self.calendarDaysArray.append(nextDayString)
         }
-        print(self.calendarDaysArray)
+//        print(self.calendarDaysArray)
+    }
+    
+    func makeDaysDictionary() {
+        //initialize a dictionary with dayStrings as keys, and 0 as values, i.e. the initial count of events per day
+        for dayString in self.calendarDaysArray {
+            self.calendarDaysDict[dayString] = 0
+        }
+//        print(self.calendarDaysDict)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.membersArray = calendarObject!["usernames"] as! [String]
+        queryParse()
     }
-    
     
     func minimumDateForCalendar(calendar: FSCalendar) -> NSDate {
         return calendar.dateWithYear(2016, month: 1, day: 1)
@@ -84,21 +89,25 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func calendar(calendar: FSCalendar, numberOfEventsForDate date: NSDate) -> Int {
-        //format the date
-
-        //need a count of number of days in month
-        
-
-        
-        //need the number of events per day per calendar (display maximum 3 dots)
-        //if event exists on that day, show 1 dot, to max 3 dots, else show none
-        //query parse, find that "Month Day, Year" string; match all events for that string -- count +1
-        
-        
+        if calendar.monthOfDate(date) == calendar.monthOfDate(self.date) &&
+            calendar.yearOfDate(date) == calendar.yearOfDate(self.date) {
+            
+            let dayIndex = calendar.dayOfDate(date) - 1
+            
+            if dayIndex < self.calendarDaysArray.count {
+                let dateString = self.calendarDaysArray[dayIndex]
+                if let eventCount = self.calendarDaysDict[dateString] {
+                    if eventCount > 3 {
+                        return 3
+                    } else {
+                        return eventCount
+                    }
+                }
+            }
+        }
         return 0
     }
 
-    
     func formatDateString(date: NSDate) -> String {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MMM d, yyyy"
@@ -107,30 +116,38 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
 
     //Query Parse for events
-//    func queryParse() {
-//        let relation = calendarObject!.relationForKey("events")
-//        let query = relation.query()
-//        
-//        query.findObjectsInBackgroundWithBlock {
-//            (objects: [PFObject]?, error: NSError?) -> Void in
-//            if error == nil && objects != nil {
-//                for object in objects! {
-//                    if let someHour = object["hourString"]{
-//                        let hourString = someHour as! String
-//                        let eventName = object["name"] as! String
-//                        self.events[hourString] = eventName
-//                        //print(self.events)
-//                    }
-//                }
-//            } else {
-//                print(error)
-//            }
-//        }
-//    }
+    func queryParse() {
+        let relation = calendarObject!.relationForKey("events")
+        let query = relation.query()
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil && objects != nil {
+                for object in objects! {
+                
+                    if let eventDateString = object["dateString"] as? String {
+                        if let eventCount = self.calendarDaysDict[eventDateString] {
+                            // self.calendarDaysDict["April 16, 2016"]!, which equals 0 intiially
+                            self.calendarDaysDict[eventDateString] = eventCount + 1
+                        }
+                    }
+                }
+//                print(self.calendarDaysDict)
+                self.calendar.reloadData()
+            } else {
+                print(error)
+            }
+        }
+    }
     
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
         NSLog("change page to \(calendar.stringFromDate(calendar.currentPage))")
         //if change page --> generate new array, requery parse?
+//        self.calendarDaysArray.removeAll()
+//        makeDaysArray(calendar.currentPage)
+//        self.calendarDaysDict.removeAll()
+//        makeDaysDictionary()
+//        queryParse()
     }
     
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
@@ -162,14 +179,10 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         return "Group members"
     }
 
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section
         return self.membersArray.count
-
-    
     }
-    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
@@ -179,7 +192,4 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
 
         return cell
     }
-  
-    
-    
 }
