@@ -47,6 +47,10 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
+        return "Group members"
+    }
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count

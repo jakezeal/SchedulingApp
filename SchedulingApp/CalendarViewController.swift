@@ -105,6 +105,10 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         // Return the number of sections.
         return 1
     }
+    func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
+        return "Group members"
+    }
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section

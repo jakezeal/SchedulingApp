@@ -28,7 +28,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         self.hours.append(newDate)
         makeCurrentDateString()
         makeHoursArray()
-        formatDateLabel()
+        //formatDateLabel()
         
     }
     
@@ -104,11 +104,19 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
-    func formatDateLabel() {
+//    func formatDateLabel() {
+//        let formatter = NSDateFormatter()
+//        formatter.dateStyle = .MediumStyle
+//        self.dateLabel.text = formatter.stringFromDate(newDate)
+//    }
+    func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
-        self.dateLabel.text = formatter.stringFromDate(newDate)
+        let dateHeader = formatter.stringFromDate(newDate)
+
+        return dateHeader
     }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         

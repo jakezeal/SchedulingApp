@@ -202,18 +202,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdb-cw-ILd">
-                                <rect key="frame" x="20" y="72" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fE9-8y-E7M">
-                                <rect key="frame" x="0.0" y="101" width="320" height="379"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="E2q-Qc-Eh6" customClass="CalendarTableViewCell" customModule="SchedulingApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E2q-Qc-Eh6" id="Ne6-Rs-SlL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -221,7 +215,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPR-Ie-peq">
                                                     <rect key="frame" x="136" y="8" width="176" height="27"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -230,7 +224,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="MIx-mf-vk8"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -260,19 +254,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Rdb-cw-ILd" firstAttribute="top" secondItem="VD2-c1-QBZ" secondAttribute="bottom" constant="8" id="35t-qO-pxv"/>
                             <constraint firstAttribute="trailing" secondItem="fE9-8y-E7M" secondAttribute="trailing" id="7nm-xC-l4n"/>
-                            <constraint firstItem="fE9-8y-E7M" firstAttribute="top" secondItem="Rdb-cw-ILd" secondAttribute="bottom" constant="8" id="8cA-O3-Db1"/>
                             <constraint firstItem="nqW-Kd-7SG" firstAttribute="top" secondItem="fE9-8y-E7M" secondAttribute="bottom" id="EKK-Ol-KcC"/>
-                            <constraint firstItem="fE9-8y-E7M" firstAttribute="top" secondItem="Rdb-cw-ILd" secondAttribute="bottom" constant="8" id="IVX-Gy-vby"/>
                             <constraint firstItem="fE9-8y-E7M" firstAttribute="leading" secondItem="ntm-fB-Oix" secondAttribute="leading" id="QLj-kV-7gu"/>
-                            <constraint firstItem="Rdb-cw-ILd" firstAttribute="leading" secondItem="ntm-fB-Oix" secondAttribute="leading" constant="20" id="YNz-3C-2Wc"/>
-                            <constraint firstAttribute="trailing" secondItem="Rdb-cw-ILd" secondAttribute="trailing" constant="20" id="p5f-mo-Sn9"/>
+                            <constraint firstItem="fE9-8y-E7M" firstAttribute="top" secondItem="ntm-fB-Oix" secondAttribute="top" id="Tct-r0-e8y"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="dateLabel" destination="Rdb-cw-ILd" id="Zwg-8w-QRd"/>
                         <outlet property="tableView" destination="fE9-8y-E7M" id="9yZ-hT-nPn"/>
                     </connections>
                 </viewController>
@@ -310,8 +299,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hour" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swZ-p2-X8y">
-                                <rect key="frame" x="20" y="84" width="38" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="84" width="40" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -524,7 +513,7 @@
         <!--Create-->
         <scene sceneID="xa6-TW-cqD">
             <objects>
-                <viewController id="5e7-yx-u64" customClass="AddMembersToCalendarViewController" customModule="SchedulingApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="5e7-yx-u64" customClass="AddMembersToCalendarViewController" customModule="SchedulingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pXH-i6-xjZ"/>
                         <viewControllerLayoutGuide type="bottom" id="8z9-Q4-lda"/>
@@ -538,7 +527,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="Kl9-ku-dOM" customClass="AddMembersTableViewCell" customModule="SchedulingApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kl9-ku-dOM" id="gvp-MX-xYd">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -546,7 +535,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVH-Ww-KdI">
                                                     <rect key="frame" x="8" y="8" width="304" height="27"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
