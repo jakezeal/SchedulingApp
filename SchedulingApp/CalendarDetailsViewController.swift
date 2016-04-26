@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class CalendarDetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var eventName: UITextField!
     @IBOutlet weak var eventDetailsTextView: UITextView!
     @IBOutlet weak var timeHeading: UILabel!
@@ -36,45 +36,8 @@ class CalendarDetailsViewController: UIViewController {
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "MMM d, yyyy hh:mm a z"
         self.timeHeading.text = formatter.stringFromDate(hourDetails)
-        getCalendarName()
     }
-    
-    func lookForEventDetails(){
-        let relation = calendarObject!.relationForKey("events")
-        let query = relation.query()
-        
-            query.whereKey("date", equalTo: self.passSelectedDate)
-            //query.whereKey("hour", equalTo: self.hourDetails)
-        
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            if error == nil && objects != nil {
-                for object in objects! {
-                        //let hourString = object["hourString"] as! String
-                        let eventName = object["name"] as! String
-                        let eventDetails = object["details"] as! String
-                      //  self.events[hourString] = eventName
 
-                        self.eventName.text = eventName
-                        self.eventDetailsTextView.text = eventDetails
-
-                      //  self.events[hourString] = eventName
-                        //print(self.events)
-                }
-            } else {
-                print(error)
-            }
-        }
-    }
-    
- 
-        
-
-
-    func getCalendarName() {
-        
-    }
-    
     @IBAction func saveDetails(sender: UIBarButtonItem) {
         let e = PFObject(className:"Event")
         e["name"] = self.eventName.text
@@ -82,23 +45,23 @@ class CalendarDetailsViewController: UIViewController {
         e["hour"] = self.hourDetails
         let hourString = makeHourString(self.hourDetails)
         e["hourString"] = hourString
-        e["date"] = self.passSelectedDate
+        e["dateString"] = self.passSelectedDate
         
         //establish relation with calendar
         
         e.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-               // print("Event saved.")
-                
                 let relation = self.calendarObject?.relationForKey("events")
                 relation?.addObject(e)
                 self.calendarObject!.saveInBackground()
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }
-    }
-        self.navigationController?.popViewControllerAnimated(true)
+            //EITHER DELEGATE OR TURN OFF CACHE AND RELOAD
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        
     }
     
     func makeHourString(date: NSDate) -> String {

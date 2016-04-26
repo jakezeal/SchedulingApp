@@ -14,6 +14,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     //MARK:- Properties
     var newDate = NSDate()
     var hours: [NSDate] = []
+
     var events = [String: PFObject]()
     var selectedDate: String!
     var calendarObject: PFObject?
@@ -28,22 +29,19 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         self.hours.append(newDate)
         makeCurrentDateString()
         makeHoursArray()
-        //formatDateLabel()
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         self.events.removeAll()
         queryParse()
-
     }
     
     //format the date, save year, month, date --> string
     func makeCurrentDateString() {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MMM d, yyyy"
-        selectedDate = formatter.stringFromDate(newDate)
-        print(selectedDate)
+        self.selectedDate = formatter.stringFromDate(newDate)
+        print(self.selectedDate)
     }
     
     func makeHourString(date: NSDate) -> String {
@@ -63,6 +61,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CalendarTableViewCell
         
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -76,16 +75,11 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         let hourString = makeHourString(hours[indexPath.row])
         
         if let someEvent = self.events[hourString]{
-        cell.eventDetails.text = someEvent["name"] as? String
+        cell.eventDetails.text = someEvent["details"] as? String
+        cell.eventName.text = someEvent["name"] as? String
+
         }
         
-//        for (key, value) in self.events {
-//            if key == hourString {
-//                cell.eventDetails.text =
-//                //print("key: \(key) hourString: \(hourString)")
-//                
-//            }
-//
         
         return cell
     }
@@ -95,8 +89,6 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
-        //print("Date: \(formatter.stringFromDate(hours[indexPath.row]))")
-        //print("Read date: \(hours[indexPath.row])")
     }
     
     //MARK:- Helpers
@@ -148,7 +140,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         let query = relation.query()
         
         if let selectedDate = self.selectedDate {
-            query.whereKey("date", equalTo: selectedDate)
+            query.whereKey("dateString", equalTo: selectedDate)
 
         }
         
