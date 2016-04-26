@@ -759,18 +759,53 @@
                                     <outlet property="delegate" destination="epc-cV-Pr7" id="Hge-0o-QQS"/>
                                 </connections>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="27" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Zh-x4-LAh">
+                                <rect key="frame" x="0.0" y="357" width="320" height="123"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="27" id="6b7-3u-olK">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="27"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6b7-3u-olK" id="NSE-SM-FLP">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5E-kd-9ER">
+                                                    <rect key="frame" x="20" y="3" width="280" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="xE5-Is-Ur6"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="M5E-kd-9ER" secondAttribute="trailing" constant="20" id="4Gw-Pc-rWs"/>
+                                                <constraint firstItem="M5E-kd-9ER" firstAttribute="centerY" secondItem="NSE-SM-FLP" secondAttribute="centerY" id="Gac-Tl-wRa"/>
+                                                <constraint firstItem="M5E-kd-9ER" firstAttribute="leading" secondItem="NSE-SM-FLP" secondAttribute="leading" constant="20" id="pZ0-or-yj0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="4Zh-x4-LAh" firstAttribute="top" secondItem="mYM-wZ-FT3" secondAttribute="bottom" constant="8" id="ARg-Z0-g0g"/>
                             <constraint firstItem="mYM-wZ-FT3" firstAttribute="top" secondItem="p4k-ct-mcf" secondAttribute="bottom" id="B3p-RJ-0Ij"/>
+                            <constraint firstItem="GoL-lL-Hsl" firstAttribute="top" secondItem="4Zh-x4-LAh" secondAttribute="bottom" id="OPH-s0-slo"/>
+                            <constraint firstItem="4Zh-x4-LAh" firstAttribute="leading" secondItem="eUA-F5-dPI" secondAttribute="leading" id="RMG-dp-7Iy"/>
                             <constraint firstItem="mYM-wZ-FT3" firstAttribute="leading" secondItem="eUA-F5-dPI" secondAttribute="leading" id="UIS-Hb-zsL"/>
                             <constraint firstAttribute="trailing" secondItem="mYM-wZ-FT3" secondAttribute="trailing" id="ncK-ro-mGo"/>
                             <constraint firstItem="GoL-lL-Hsl" firstAttribute="top" secondItem="mYM-wZ-FT3" secondAttribute="bottom" constant="131" id="qG5-ag-Pwb"/>
+                            <constraint firstAttribute="trailing" secondItem="4Zh-x4-LAh" secondAttribute="trailing" id="zhd-W9-xLc"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="calendar" destination="mYM-wZ-FT3" id="KPK-21-u1f"/>
+                        <outlet property="membersTableView" destination="4Zh-x4-LAh" id="QX3-dQ-KTu"/>
                         <segue destination="4AN-5U-J4S" kind="show" identifier="showCalendarTableView" id="ghK-cA-ohn"/>
                     </connections>
                 </viewController>

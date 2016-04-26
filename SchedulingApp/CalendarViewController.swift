@@ -10,19 +10,30 @@ import UIKit
 import FSCalendar
 import Parse
 
-class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
+class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate,UITableViewDataSource, UITableViewDelegate {
     
     //MARK:- Properties
     var didOpenCalendar: Bool!
     var date = NSDate()
     var calendarObject: PFObject?
+    var membersArray:[String] = []
     
     //MARK:- Outlets
     @IBOutlet weak var calendar: FSCalendar!
     
+    @IBOutlet weak var membersTableView: UITableView!
+    
     //MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        membersTableView.delegate = self
+        membersTableView.dataSource = self
+
+        
+
+//        for calendar with title = calendar title
+//        print(cal["usernames"])
+
         
         self.didOpenCalendar = true
         
@@ -43,6 +54,11 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
          }
          */
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.membersArray = calendarObject!["usernames"] as! [String]
     }
     
     
@@ -82,5 +98,31 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
             nextVC.calendarObject = self.calendarObject
         }
     }
+    
+    //TableView data source
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections.
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of rows in the section
+        return self.membersArray.count
+
+    
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        
+        let members = self.membersArray[indexPath.row]
+        cell.textLabel?.text = members
+
+        return cell
+    }
+  
+    
     
 }
