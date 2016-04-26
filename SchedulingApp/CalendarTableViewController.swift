@@ -56,6 +56,28 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     //MARK:- UITableViewDataSource
+//    
+//    func tableView(tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
+//        
+//        
+//        return dateHeader
+//    }
+
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        let dateHeader = formatter.stringFromDate(newDate)
+        
+        let label = UILabel(frame: CGRectMake(0, 0, self.view.frame.size.width, 40))
+        
+        label.text = dateHeader
+        label.textAlignment = .Center
+//        label.textColor = UIColor.init(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+        return label
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.hours.count
     }
@@ -69,7 +91,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
-        formatter.dateFormat = "hh:mm a z"
+        formatter.dateFormat = "hh:mm a"
         cell.hourLabel.text = formatter.stringFromDate(hours[indexPath.row])
         
         let hourString = makeHourString(hours[indexPath.row])
@@ -99,20 +121,6 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
             self.hours.append(nextHour)
         }
     }
-    
-//    func formatDateLabel() {
-//        let formatter = NSDateFormatter()
-//        formatter.dateStyle = .MediumStyle
-//        self.dateLabel.text = formatter.stringFromDate(newDate)
-//    }
-    func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        let dateHeader = formatter.stringFromDate(newDate)
-
-        return dateHeader
-    }
-
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -150,9 +158,8 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
                 for object in objects! {
                     if let someHour = object["hourString"]{
                         let hourString = someHour as! String
-                        //let eventName = object["name"] as! String
                         self.events[hourString] = object
-                        //print(self.events)
+                        self.tableView.reloadData()
                     }
                 }
             } else {
