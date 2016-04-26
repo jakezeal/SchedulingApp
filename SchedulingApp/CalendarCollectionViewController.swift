@@ -13,6 +13,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
 
     var calendarNames: [String] = []
     var calendars: [PFObject] = []
+    var events: [PFObject] = []
     var refreshControl: UIRefreshControl!
 
     
@@ -52,17 +53,40 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
                     
                     let calendarTitle = object["title"] as! String
                     self.calendarNames.append(calendarTitle)
-                    print(self.calendarNames)
+//                    print(self.calendarNames)
                 }
                 dispatch_async(dispatch_get_main_queue()){
                     self.collectionView.reloadData()
                     self.calendars = objects!
+                    self.queryParseForEvents()
                 }
             } else {
                 print(error)
             }
         }
     }
+    
+    func queryParseForEvents() {
+        for calendar in self.calendars {
+            let relation = calendar.relationForKey("events")
+            let query = relation.query()
+            
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [PFObject]?, error: NSError?) -> Void in
+                if error == nil && objects != nil {
+                    for object in objects! {
+                        self.events.append(object)
+//                        print(self.events)
+                    }
+                } else {
+                    print(error)
+                } 
+            }
+        }
+        
+
+    }
+    
     
     //MARK:- Preperations
     func prepareCollectionView() {
