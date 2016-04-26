@@ -29,9 +29,20 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         self.hours.append(newDate)
         makeCurrentDateString()
         makeHoursArray()
+
     }
     
     override func viewWillAppear(animated: Bool) {
+        let backgroundImage = UIImage(named: "Calendar-1")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        imageView.contentMode = .ScaleAspectFit
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = self.view.frame
+        imageView.addSubview(blurView)
+        
         self.events.removeAll()
         queryParse()
     }
@@ -51,7 +62,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         return hour
     }
     
-     override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         self.tableView.reloadData()
     }
     
@@ -74,7 +85,8 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         
         label.text = dateHeader
         label.textAlignment = .Center
-//        label.textColor = UIColor.init(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+        label.font = label.font.fontWithSize(25)
+
         return label
     }
     
@@ -102,7 +114,6 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
 
         }
         
-        
         return cell
     }
     
@@ -111,6 +122,11 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "hh:mm a z"
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        cell.backgroundColor = UIColor(white: 1, alpha: 0.90)
+        cell.backgroundColor = .clearColor()
     }
     
     //MARK:- Helpers
