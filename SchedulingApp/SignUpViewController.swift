@@ -27,12 +27,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField:    UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var errorLabel: UILabel!
-    
     // MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTextFields()
+        prepareSubviews()
     }
     
     // MARK:- Preperations
@@ -41,6 +40,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         self.passwordTextField.secureTextEntry = true
+    }
+    
+    func prepareSubviews() {
+        self.signUpButton.addShadow()
+        self.emailTextField.addShadow()
+        self.passwordTextField.addShadow()
     }
     
     // MARK:- Actions

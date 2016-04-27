@@ -33,6 +33,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         setupTextFields()
         preparePasswordSignIn()
+        prepareSubviews()
     }
     
     override func awakeFromNib() {
@@ -42,6 +43,12 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     // MARK:- Preparations
     func preparePasswordSignIn() {
         self.passwordTextField.secureTextEntry = true
+    }
+    
+    func prepareSubviews() {
+        self.loginButton.addShadow()
+        self.usernameTextField.addShadow()
+        self.passwordTextField.addShadow()
     }
     
     // MARK:- Actions
