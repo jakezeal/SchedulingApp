@@ -36,10 +36,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         prepareSubviews()
     }
     
-    override func awakeFromNib() {
-        
-    }
-    
     // MARK:- Preparations
     func preparePasswordSignIn() {
         self.passwordTextField.secureTextEntry = true
