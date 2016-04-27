@@ -24,7 +24,17 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     //MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        self.view.backgroundColor = UIColor(white: 1, alpha: 0.90)
+        self.collectionView.backgroundColor = UIColor(white: 1, alpha: 0.90)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //always fill the view
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        
+        self.collectionView.sendSubviewToBack(blurEffectView)
+        self.view.sendSubviewToBack(blurEffectView)
+        
         prepareCollectionView()
 
        
@@ -39,6 +49,8 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
 //    }
     
     override func viewWillAppear(animated: Bool) {
+        
+        
         //query parse for user-specific calendars
         self.calendarNames = []
         self.events = []
