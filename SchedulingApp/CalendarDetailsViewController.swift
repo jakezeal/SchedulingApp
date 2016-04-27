@@ -45,6 +45,7 @@ class CalendarDetailsViewController: UIViewController {
         e["name"] = self.eventName.text
         e["details"] = self.eventDetailsTextView.text
         e["hour"] = self.hourDetails
+        
         let hourString = makeHourString(self.hourDetails)
         e["hourString"] = hourString
         e["dateString"] = self.passSelectedDate
@@ -57,15 +58,15 @@ class CalendarDetailsViewController: UIViewController {
                 let relation = self.calendarObject?.relationForKey("events")
                 relation?.addObject(e)
                 if let someObject = self.calendarObject{
-                someObject.saveInBackground()
-                }
+                someObject.saveInBackgroundWithBlock({ (finished, error) in
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }
             //EITHER DELEGATE OR TURN OFF CACHE AND RELOAD
-            self.navigationController?.popViewControllerAnimated(true)
+            } 
         }
-        
     }
     
     func makeHourString(date: NSDate) -> String {

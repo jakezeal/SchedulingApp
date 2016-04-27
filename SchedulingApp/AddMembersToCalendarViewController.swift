@@ -71,8 +71,9 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     }
     
     @IBAction func saveCalendar(sender: UIBarButtonItem) {
-        saveCalendar()
-        self.navigationController?.popViewControllerAnimated(true)
+        saveCalendarToParse { (result) in
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     // MARK:- UITableViewDataSource
@@ -144,7 +145,7 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
         }
     }
     
-    func saveCalendar() {
+    func saveCalendarToParse(completion: (result: String) -> Void) {
         // Save calendar name, users associated with it and 0 events.
         //let cal = PFObject(className:"Calendar")
         
@@ -155,6 +156,7 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
         cal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
+                completion(result: "Yay")
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }
