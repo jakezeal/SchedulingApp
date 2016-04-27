@@ -98,7 +98,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil && objects != nil {
                 for object in objects! {
-                
+
                     if let eventDateString = object["dateString"] as? String {
                         if let eventCount = self.calendarDaysDict[eventDateString] {
 
