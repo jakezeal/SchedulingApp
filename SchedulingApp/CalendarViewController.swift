@@ -101,6 +101,17 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 for object in objects! {
 
                     if let eventDateString = object["dateString"] as? String {
+                        
+//                        let maybeCount = self.calendarDaysDict[eventDateString]
+//                        if (maybeCount != nil) {
+//                            let count = maybeCount!
+//                            self.calendarDaysDict[eventDateString] = count + 1
+//                        } else {
+//                            self.calendarDaysDict[eventDateString] = 1
+//                        }
+//                        
+
+                        // if let = optional binding
                         if let eventCount = self.calendarDaysDict[eventDateString] {
 
                             self.calendarDaysDict[eventDateString] = eventCount + 1
