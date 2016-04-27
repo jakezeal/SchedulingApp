@@ -22,17 +22,20 @@ class CalendarDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let event = eventObject{
-        let eventName = event["name"] as! String
-        let eventDetails = event["details"] as! String
-        //  self.events[hourString] = eventName
-        
-        self.eventName.text = eventName
-        self.eventDetailsTextView.text = eventDetails
+        if let event = eventObject {
+            let eventName = event["name"] as! String
+            let eventDetails = event["details"] as! String
+            //  self.events[hourString] = eventName
+            
+            self.eventName.text = eventName
+            self.eventDetailsTextView.text = eventDetails
         }
-
-        
-//        self.navigationController?.navigationBar.titleTextAttributes = UIColor.init(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
+        prepareSubviews()
+    }
+    
+    func prepareSubviews() {
+        eventDetailsTextView.addShadow()
+        eventName.addShadow()
         
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
