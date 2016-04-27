@@ -40,12 +40,40 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         self.passwordTextField.secureTextEntry = true
+        setupTextFieldViews()
     }
     
     func prepareSubviews() {
         self.signUpButton.addShadow()
+        self.usernameTextField.addShadow()
         self.emailTextField.addShadow()
         self.passwordTextField.addShadow()
+    }
+    
+    func setupTextFieldViews() {
+        //Username
+        usernameTextField.leftViewMode = .Always
+        let imageView = UIImageView(image: UIImage(named: "User"))
+        
+        imageView.contentMode = UIViewContentMode.Center
+        imageView.frame = CGRectMake(0.0, 0.0, imageView.image!.size.width + 20.0, imageView.image!.size.height)
+        usernameTextField.leftView = imageView
+        
+        //Email
+        emailTextField.leftViewMode = .Always
+        let imageView2 = UIImageView(image: UIImage(named: "Envelope"))
+        
+        imageView2.contentMode = UIViewContentMode.Center
+        imageView2.frame = CGRectMake(0.0, 0.0, imageView2.image!.size.width + 20.0, imageView2.image!.size.height)
+        emailTextField.leftView = imageView2
+        
+        //Password
+        passwordTextField.leftViewMode = .Always
+        let imageView3 = UIImageView(image: UIImage(named: "Lock"))
+        
+        imageView3.contentMode = UIViewContentMode.Center
+        imageView3.frame = CGRectMake(0.0, 0.0, imageView3.image!.size.width + 20.0, imageView3.image!.size.height)
+        passwordTextField.leftView = imageView3
     }
     
     // MARK:- Actions
@@ -60,7 +88,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         if !(username ?? "").isEmpty && !(password ?? "").isEmpty {
             userSignup(username!, password: password!, isTrainer: isTrainer)
-            //self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewControllerAnimated(true)
 
         } else {
             showAlert()

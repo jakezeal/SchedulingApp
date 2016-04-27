@@ -129,6 +129,18 @@
 			name = "Create Calendar";
 			sourceTree = "<group>";
 		};
+		E244CAC51CD04B9600744934 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E244CAC31CD0363B00744934 /* UIView+Shadow.swift */,
+				E2752D9C1CC943A000B76C3E /* Assets.xcassets */,
+				E2752D9E1CC943A000B76C3E /* LaunchScreen.storyboard */,
+				E2752DA11CC943A000B76C3E /* Info.plist */,
+				E2752DA71CC9459000B76C3E /* bridge.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E2752D891CC9439F00B76C3E = {
 			isa = PBXGroup;
 			children = (
@@ -155,12 +167,8 @@
 				E20592961CC96F220042E162 /* Calendar */,
 				E285FD131CCAC73600C891F2 /* Model Objects */,
 				E20592951CC9520B0042E162 /* DataManager */,
-				E244CAC31CD0363B00744934 /* UIView+Shadow.swift */,
+				E244CAC51CD04B9600744934 /* Supporting Files */,
 				E2752D991CC9439F00B76C3E /* Main.storyboard */,
-				E2752D9C1CC943A000B76C3E /* Assets.xcassets */,
-				E2752D9E1CC943A000B76C3E /* LaunchScreen.storyboard */,
-				E2752DA11CC943A000B76C3E /* Info.plist */,
-				E2752DA71CC9459000B76C3E /* bridge.h */,
 			);
 			path = SchedulingApp;
 			sourceTree = "<group>";

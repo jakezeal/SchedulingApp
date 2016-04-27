@@ -29,6 +29,7 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
         prepareTableView()
         showAlert()
     }
+    
     func showAlert(){
         let alertController = UIAlertController(title: "Create Calendar", message: "Enter a name for your calendar", preferredStyle: UIAlertControllerStyle.Alert)
         

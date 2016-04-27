@@ -31,7 +31,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     // MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTextFields()
+        prepareTextFields()
         preparePasswordSignIn()
         prepareSubviews()
     }
@@ -49,6 +49,28 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         self.loginButton.addShadow()
         self.usernameTextField.addShadow()
         self.passwordTextField.addShadow()
+    }
+    
+    func prepareTextFields() {
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        setupTextFieldViews()
+    }
+    
+    func setupTextFieldViews() {
+        usernameTextField.leftViewMode = .Always
+        let imageView = UIImageView(image: UIImage(named: "User"))
+        
+        imageView.contentMode = UIViewContentMode.Center
+        imageView.frame = CGRectMake(0.0, 0.0, imageView.image!.size.width + 20.0, imageView.image!.size.height)
+        usernameTextField.leftView = imageView
+        
+        passwordTextField.leftViewMode = .Always
+        let imageView2 = UIImageView(image: UIImage(named: "Lock"))
+        
+        imageView2.contentMode = UIViewContentMode.Center
+        imageView2.frame = CGRectMake(0.0, 0.0, imageView2.image!.size.width + 20.0, imageView2.image!.size.height)
+        passwordTextField.leftView = imageView2
     }
     
     // MARK:- Actions
@@ -75,24 +97,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     // MARK:- Helpers
     
-    func setupTextFields() {
-        usernameTextField.delegate = self
-        passwordTextField.delegate = self
-        
-        usernameTextField.leftViewMode = .Always
-        let imageView = UIImageView(image: UIImage(named: "Envelope"))
-        
-        imageView.contentMode = UIViewContentMode.Center
-        imageView.frame = CGRectMake(0.0, 0.0, imageView.image!.size.width + 20.0, imageView.image!.size.height)
-        usernameTextField.leftView = imageView
-        
-        passwordTextField.leftViewMode = .Always
-        let imageView2 = UIImageView(image: UIImage(named: "Lock"))
-        
-        imageView2.contentMode = UIViewContentMode.Center
-        imageView2.frame = CGRectMake(0.0, 0.0, imageView2.image!.size.width + 20.0, imageView2.image!.size.height)
-        passwordTextField.leftView = imageView2
-    }
+
     
     func userSignIn(username: String, password: String) {
         DataManager.sharedInstance.signInUser(username, password: password) { (user, error) -> Void in
