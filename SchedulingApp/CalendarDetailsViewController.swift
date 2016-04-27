@@ -56,7 +56,9 @@ class CalendarDetailsViewController: UIViewController {
             if (success) {
                 let relation = self.calendarObject?.relationForKey("events")
                 relation?.addObject(e)
-                self.calendarObject!.saveInBackground()
+                if let someObject = self.calendarObject{
+                someObject.saveInBackground()
+                }
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }
