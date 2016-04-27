@@ -178,8 +178,12 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! AllCalendarsTableViewCell
         
-        let nameString:String = self.events[indexPath.row]["name"] as! String
-                
+    
+        
+        if let nameString =  self.events[indexPath.row]["name"] as? String {
+            cell.titleLabel.text = nameString
+        }
+        
         let eventTime = self.events[indexPath.row]["hour"] as! NSDate
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MMM d, yyyy hh:mm"
@@ -194,7 +198,6 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         
         cell.event = self.events[indexPath.row]
         
-        cell.titleLabel.text = nameString
         cell.dateLabel.text = dateString
         //cell.calendarNameLabel.text = calendarString
         
