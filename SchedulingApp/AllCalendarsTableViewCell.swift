@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class AllCalendarsTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
@@ -14,6 +15,8 @@ class AllCalendarsTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     
     @IBOutlet weak var intervalLabel: UILabel!
+    
+    var event: PFObject!
     
     
 }

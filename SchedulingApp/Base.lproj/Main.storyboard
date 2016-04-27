@@ -497,6 +497,7 @@
                                             <outlet property="dateLabel" destination="Xfy-tf-Y1F" id="evg-zx-019"/>
                                             <outlet property="intervalLabel" destination="i8r-fG-ESZ" id="0cf-RF-fWS"/>
                                             <outlet property="titleLabel" destination="M4m-wy-6xg" id="Djb-LL-DQt"/>
+                                            <segue destination="jMQ-D9-Udf" kind="show" identifier="EventDetailsSegue" id="nEc-dh-1lf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -943,4 +944,7 @@
     <resources>
         <image name="Cancel" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="nEc-dh-1lf"/>
+    </inferredMetricsTieBreakers>
 </document>
