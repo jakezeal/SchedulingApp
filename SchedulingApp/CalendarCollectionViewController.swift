@@ -9,13 +9,14 @@
 import UIKit
 import Parse
 
-class CalendarCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class CalendarCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate {
 
     var calendarNames: [String] = []
     var calendars: [PFObject] = []
     var events: [PFObject] = []
     var refreshControl: UIRefreshControl!
 
+    @IBOutlet weak var allEventsTableView: UITableView!
     
     //MARK:- Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -23,8 +24,9 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     //MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+            
         prepareCollectionView()
+
        
        // refreshControl = UIRefreshControl()
         //refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -39,7 +41,11 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     override func viewWillAppear(animated: Bool) {
         //query parse for user-specific calendars
         self.calendarNames = []
+        self.events = []
         queryParse()
+        self.collectionView.reloadData()
+
+
     }
     
     func queryParse() {
@@ -50,7 +56,6 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil && objects != nil {
                 for object in objects! {
-                    
                     let calendarTitle = object["title"] as! String
                     self.calendarNames.append(calendarTitle)
 //                    print(self.calendarNames)
@@ -59,6 +64,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
                     self.collectionView.reloadData()
                     self.calendars = objects!
                     self.queryParseForEvents()
+
                 }
             } else {
                 print(error)
@@ -74,10 +80,21 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
             query.findObjectsInBackgroundWithBlock {
                 (objects: [PFObject]?, error: NSError?) -> Void in
                 if error == nil && objects != nil {
+                    print("Events \(self.events)")
+                    let now = NSDate()
                     for object in objects! {
-                        self.events.append(object)
+                        if (object["hour"] as! NSDate).compare(now) == .OrderedDescending {
+                            self.events.append(object)
+                        }
 //                        print(self.events)
                     }
+                    self.events.sortInPlace({ (a, b) -> Bool in
+                        (a["hour"] as! NSDate).compare((b["hour"] as! NSDate)) == .OrderedAscending
+                    })
+                    dispatch_async(dispatch_get_main_queue(), { 
+                        self.allEventsTableView.reloadData()
+                    })
+
                 } else {
                     print(error)
                 } 
@@ -93,6 +110,8 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
+    
+    
     
     //MARK:- UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -127,6 +146,62 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
             }
             
         }
+    }
+    
+    //Implement Table View
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections.
+        return 1
+    }
+    func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
+        return "All Events"
+    }
+
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of rows in the section
+        return self.events.count
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! AllCalendarsTableViewCell
+        
+        let nameString:String = self.events[indexPath.row]["name"] as! String
+                
+        let eventTime = self.events[indexPath.row]["hour"] as! NSDate
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "MMM d, yyyy hh:mm"
+        
+        let dateString: String = formatter.stringFromDate(eventTime)
+        
+        let todaysDate = NSDate()
+        let interval = eventTime.timeIntervalSinceDate(todaysDate)
+        //let timeFromNow = stringFromTimeInterval(interval)
+        
+        print(interval)
+        
+        cell.titleLabel.text = nameString
+        cell.dateLabel.text = dateString
+        
+        if(interval < 86400 && interval > 0){
+        cell.intervalLabel.text = (String(format: "In %.0f hours", interval/3600))
+       // cell.intervalLabel.text = "In %.0f 3600 hours"
+        }else if (interval > 86400){
+        cell.intervalLabel.text = (String(format:"In %.0f days",interval/86400))
+   
+        }
+
+        return cell
+    }
+    
+    func stringFromTimeInterval(interval: NSTimeInterval) -> String {
+        let interval = Int(interval)
+        let seconds = interval % 60
+        let minutes = (interval / 60) % 60
+        let hours = (interval / 3600)
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
 }

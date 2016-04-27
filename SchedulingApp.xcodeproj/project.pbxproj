@@ -11,6 +11,7 @@
 		31400A861CC97BE50091EAFA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400A851CC97BE50091EAFA /* CalendarTableViewCell.swift */; };
 		31400A881CCA830F0091EAFA /* CalendarDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400A871CCA830E0091EAFA /* CalendarDetailsViewController.swift */; };
 		31400A8A1CCA949D0091EAFA /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31400A891CCA949D0091EAFA /* Event.swift */; };
+		3FE03D401CD032D900450058 /* AllCalendarsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE03D3F1CD032D900450058 /* AllCalendarsTableViewCell.swift */; };
 		C60A8F95C346E8CC34C0E370 /* Pods_SchedulingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676FC0CB8EA52EDB5A7DD827 /* Pods_SchedulingApp.framework */; };
 		E205928D1CC951610042E162 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205928C1CC951610042E162 /* WelcomeViewController.swift */; };
 		E20592931CC951E60042E162 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20592921CC951E60042E162 /* ForgotPasswordViewController.swift */; };
@@ -36,6 +37,7 @@
 		31400A851CC97BE50091EAFA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		31400A871CCA830E0091EAFA /* CalendarDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDetailsViewController.swift; sourceTree = "<group>"; };
 		31400A891CCA949D0091EAFA /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		3FE03D3F1CD032D900450058 /* AllCalendarsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllCalendarsTableViewCell.swift; sourceTree = "<group>"; };
 		676FC0CB8EA52EDB5A7DD827 /* Pods_SchedulingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SchedulingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C69A75E2A9137EF364DB96FC /* Pods-SchedulingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchedulingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SchedulingApp/Pods-SchedulingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E205928C1CC951610042E162 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				E20592991CC971770042E162 /* CalendarCollectionViewController.swift */,
+				3FE03D3F1CD032D900450058 /* AllCalendarsTableViewCell.swift */,
 				E205929B1CC971DD0042E162 /* CalendarCollectionViewCell.swift */,
 			);
 			name = CollectionView;
@@ -319,6 +322,7 @@
 				E20592931CC951E60042E162 /* ForgotPasswordViewController.swift in Sources */,
 				31400A841CC97B280091EAFA /* CalendarTableViewController.swift in Sources */,
 				E205928D1CC951610042E162 /* WelcomeViewController.swift in Sources */,
+				3FE03D401CD032D900450058 /* AllCalendarsTableViewCell.swift in Sources */,
 				E2752D981CC9439F00B76C3E /* SignInViewController.swift in Sources */,
 				31400A881CCA830F0091EAFA /* CalendarDetailsViewController.swift in Sources */,
 				E2752DA91CC949BA00B76C3E /* DataManager.swift in Sources */,
