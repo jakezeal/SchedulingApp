@@ -25,7 +25,6 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(white: 1, alpha: 0.90)
-        self.collectionView.backgroundColor = UIColor(white: 1, alpha: 0.90)
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         //always fill the view
