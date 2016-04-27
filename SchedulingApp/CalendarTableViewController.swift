@@ -86,6 +86,7 @@ class CalendarTableViewController: UIViewController, UITableViewDataSource, UITa
         label.text = dateHeader
         label.textAlignment = .Center
         label.font = label.font.fontWithSize(25)
+        label.textColor = UIColor(red: 202.0/255.0, green: 15.0/255.0, blue: 19.0/255.0, alpha: 1.0)
 
         return label
     }

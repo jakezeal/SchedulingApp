@@ -230,13 +230,12 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPR-Ie-peq">
                                                     <rect key="frame" x="16" y="8" width="296" height="20"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqf-9O-5lw">
                                                     <rect key="frame" x="16" y="37" width="288" height="38"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -523,7 +522,7 @@
                     <navigationItem key="navigationItem" title="Calendars" id="0xf-KO-TO6">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="aBK-jq-atl">
                             <connections>
-                                <segue destination="5e7-yx-u64" kind="show" identifier="AddMembersViewController" id="6Dw-r5-oJR"/>
+                                <segue destination="5e7-yx-u64" kind="show" id="1UG-Fd-Rwy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -636,7 +635,7 @@
                         <viewControllerLayoutGuide type="top" id="pXH-i6-xjZ"/>
                         <viewControllerLayoutGuide type="bottom" id="8z9-Q4-lda"/>
                     </layoutGuides>
-                    <view key="view" alpha="0.84999999999999998" contentMode="scaleToFill" id="BFu-I2-fVl">
+                    <view key="view" contentMode="scaleToFill" id="BFu-I2-fVl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
