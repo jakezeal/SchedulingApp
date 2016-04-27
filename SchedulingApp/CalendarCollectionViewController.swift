@@ -144,11 +144,19 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
                 let indexPath = collectionView.indexPathForCell(selectedCell)!
                 calendarVC.calendarObject = calendars[indexPath.row]
             }
+        } else if segue.identifier == "EventDetailsSegue" {
+            let eventDetailsVC = segue.destinationViewController as! CalendarDetailsViewController
+            eventDetailsVC.eventObject = (sender as! AllCalendarsTableViewCell).event
             
         }
+        
     }
     
     //Implement Table View
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = self.allEventsTableView.cellForRowAtIndexPath(indexPath)
+        NSLog("did select and the text is \(cell?.textLabel?.text)")
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
@@ -182,15 +190,18 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         
         print(interval)
         
+        cell.event = self.events[indexPath.row]
+        
         cell.titleLabel.text = nameString
         cell.dateLabel.text = dateString
+        //cell.calendarNameLabel.text = calendarString
         
         if(interval < 86400 && interval > 0){
-        cell.intervalLabel.text = (String(format: "In %.0f hours", interval/3600))
-       // cell.intervalLabel.text = "In %.0f 3600 hours"
+            cell.intervalLabel.text = (String(format: "In %.0f hours", interval/3600))
+            // cell.intervalLabel.text = "In %.0f 3600 hours"
         }else if (interval > 86400){
-        cell.intervalLabel.text = (String(format:"In %.0f days",interval/86400))
-   
+            cell.intervalLabel.text = (String(format:"In %.0f days",interval/86400))
+            
         }
 
         return cell
