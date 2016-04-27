@@ -20,6 +20,7 @@ class WelcomeViewController : UIViewController {
         super.viewDidLoad()
         prepareView()
         prepareImageView()
+        prepareSubviews()
     }
     
     //MARK:- Preperations
@@ -29,6 +30,11 @@ class WelcomeViewController : UIViewController {
     
     func prepareImageView() {
         self.imageView.image = UIImage.init(named: "Calendar-1")
+    }
+    
+    func prepareSubviews() {
+        self.signUpButton.addShadow()
+        self.loginButton.addShadow()
     }
     
     //MARK:- Actions
