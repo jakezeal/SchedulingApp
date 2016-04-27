@@ -76,7 +76,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         if !(username ?? "").isEmpty && !(password ?? "").isEmpty {
             userSignIn(username!, password: password!)
-            //** Determine which view we will go to based on account type. **//
         } else {
             showAlert()
         }
@@ -91,10 +90,14 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         performSegueWithIdentifier("CalendarCollectionViewController", sender: nil)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "CalendarCollectionViewController" {
+            let nav = segue.destinationViewController as! UINavigationController
+            nav.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red: 202.0/255.0, green: 15.0/255.0, blue: 19.0/255.0, alpha: 1.0)]
+        }
+    }
+    
     // MARK:- Helpers
-    
-
-    
     func userSignIn(username: String, password: String) {
         DataManager.sharedInstance.signInUser(username, password: password) { (user, error) -> Void in
             if user != nil {

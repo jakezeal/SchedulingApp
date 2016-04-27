@@ -38,9 +38,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.scrollDirection = .Horizontal
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
         calendar.selectDate(NSDate())
-
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red: 202.0/255.0, green: 15.0/255.0, blue: 19.0/255.0, alpha: 0.0/255.0)]
-
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -48,7 +45,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.membersArray = calendarObject!["usernames"] as! [String]
         self.calendarDaysDict.removeAll()
         queryParse()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.redColor()]
     }
     
     func minimumDateForCalendar(calendar: FSCalendar) -> NSDate {
