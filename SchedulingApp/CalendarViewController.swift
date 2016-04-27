@@ -39,23 +39,15 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
         calendar.selectDate(NSDate())
 
-        
-        // Uncomment this to test month->week and week->month transition
-        /*
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-         self.calendar.setScope(.Week, animated: true)
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-         self.calendar.setScope(.Month, animated: true)
-         }
-         }
-         */
-        
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red: 202.0/255.0, green: 15.0/255.0, blue: 19.0/255.0, alpha: 0.0/255.0)]
+
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.membersArray = calendarObject!["usernames"] as! [String]
         queryParse()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.redColor()]
     }
     
     func minimumDateForCalendar(calendar: FSCalendar) -> NSDate {

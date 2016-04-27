@@ -28,6 +28,13 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
         super.viewDidLoad()
         prepareTableView()
         showAlert()
+    
+//        self.navigationController?.navigationItem.backBarButtonItem?.tintColor = UIColor
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red: 202.0/255.0, green: 15.0/255.0, blue: 19.0/255.0, alpha: 0.0/255.0)]
+//        self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
+//        self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
+        
+//            UIColor(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
     }
     
     func showAlert(){
@@ -157,12 +164,6 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
         cal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                //print("Users saved.")
-                print(self.cal["usernames"])
-                
-                //dispatch_async(dispatch_get_main_queue(),{
-                //
-                //                })
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }
