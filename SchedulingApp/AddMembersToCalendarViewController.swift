@@ -16,7 +16,7 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     var users:[User] = []
     var usernames:[String] = []
     var cal = PFObject(className:"Calendar")
-
+    var user = PFUser.currentUser()
     
     // MARK:- Outlets
     @IBOutlet weak var calendarTextField: UITextField!
@@ -152,6 +152,9 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     func saveCalendar() {
         // Save calendar name, users associated with it and 0 events.
         //let cal = PFObject(className:"Calendar")
+        
+        let username = self.user!["username"] as! String
+        self.usernames.append(username)
         self.cal["usernames"] = self.usernames
         
         cal.saveInBackgroundWithBlock {
