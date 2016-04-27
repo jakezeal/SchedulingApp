@@ -55,6 +55,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.membersArray = calendarObject!["usernames"] as! [String]
+        self.calendarDaysDict.removeAll()
         queryParse()
     }
     
