@@ -155,7 +155,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         return 1
     }
     func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
-        return "All Events"
+        return "Next Events"
     }
 
     
