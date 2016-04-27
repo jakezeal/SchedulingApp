@@ -27,41 +27,36 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTableView()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        //self.performSelector(#selector(AddMembersToCalendarViewController.showAlert), withObject: self, afterDelay: 1.0)
         showAlert()
     }
     
     func showAlert(){
         let alertController = UIAlertController(title: "Create Calendar", message: "Enter a name for your calendar", preferredStyle: UIAlertControllerStyle.Alert)
         
-        
         let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
             alert -> Void in
             let calendarName = alertController.textFields![0] as UITextField
             self.cal["title"] = calendarName.text
             self.title = calendarName.text
-
-
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
             (action : UIAlertAction!) -> Void in
             self.navigationController?.popViewControllerAnimated(true)
-
-            
-            
         })
         alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
             textField.placeholder = "Calendar name"
+//            textField.tintColor = UIColor(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
         }
 
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
-
-
-
-
-        
     }
     
     // MARK:- Preperations
@@ -160,12 +155,6 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
         cal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                //print("Users saved.")
-                print(self.cal["usernames"])
-                
-                //dispatch_async(dispatch_get_main_queue(),{
-                //
-                //                })
             } else {
                 print("Error ==>>> \(error?.localizedDescription)")
             }

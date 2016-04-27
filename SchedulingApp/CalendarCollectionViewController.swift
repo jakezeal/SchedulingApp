@@ -28,14 +28,14 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         prepareCollectionView()
 
        
-       // refreshControl = UIRefreshControl()
-        //refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        //refreshControl.addTarget(self, action: #selector(CalendarCollectionViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        //self.collectionView.addSubview(refreshControl) // not required when using UITableViewController
+//        refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+//        refreshControl.addTarget(self, action: #selector(CalendarCollectionViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+//        self.collectionView.addSubview(refreshControl) // not required when using UITableViewController
     }
 //    func refresh(sender:AnyObject) {
 //        collectionView.reloadData()
-//        refreshControl.endRefreshing()
+//        //refreshControl.endRefreshing()
 //    }
     
     override func viewWillAppear(animated: Bool) {
@@ -43,7 +43,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         self.calendarNames = []
         self.events = []
         queryParse()
-        self.collectionView.reloadData()
+        //self.collectionView.reloadData()
 
 
     }
@@ -64,6 +64,8 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
                     self.collectionView.reloadData()
                     self.calendars = objects!
                     self.queryParseForEvents()
+                    self.collectionView.reloadData()
+
 
                 }
             } else {

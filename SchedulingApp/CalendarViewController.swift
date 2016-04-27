@@ -38,18 +38,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.scrollDirection = .Horizontal
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
         calendar.selectDate(NSDate())
-
-        
-        // Uncomment this to test month->week and week->month transition
-        /*
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-         self.calendar.setScope(.Week, animated: true)
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-         self.calendar.setScope(.Month, animated: true)
-         }
-         }
-         */
-        
     }
     
     override func viewWillAppear(animated: Bool) {
