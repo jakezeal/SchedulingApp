@@ -27,14 +27,6 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTableView()
-       
-    
-//        self.navigationController?.navigationItem.backBarButtonItem?.tintColor = UIColor
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red: 202.0/255.0, green: 15.0/255.0, blue: 19.0/255.0, alpha: 0.0/255.0)]
-//        self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
-//        self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
-        
-//            UIColor(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -18,7 +18,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer.borderColor = UIColor.blueColor().colorWithAlphaComponent(0.6).CGColor
+        layer.borderColor = UIColor(red: 202.0/255.0, green: 15.0/255.0, blue: 19.0/255.0, alpha: 1.0/255.0).colorWithAlphaComponent(0.6).CGColor
         layer.borderWidth = 1.0
     }
 }
