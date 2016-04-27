@@ -25,21 +25,24 @@ class CalendarDetailsViewController: UIViewController {
         if let event = eventObject{
         let eventName = event["name"] as! String
         let eventDetails = event["details"] as! String
-        //  self.events[hourString] = eventName
         
         self.eventName.text = eventName
         self.eventDetailsTextView.text = eventDetails
         }
 
-        
-//        self.navigationController?.navigationBar.titleTextAttributes = UIColor.init(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
-        
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(abbreviation: "EST")
         formatter.dateFormat = "MMM d, yyyy hh:mm a"
         self.timeHeading.text = formatter.stringFromDate(hourDetails)
+        
+        prepareSubviews()
     }
 
+    func prepareSubviews() {
+        eventName.addShadow()
+        eventDetailsTextView.addShadow()
+    }
+    
     @IBAction func saveDetails(sender: UIBarButtonItem) {
         let e = PFObject(className:"Event")
         e["name"] = self.eventName.text
