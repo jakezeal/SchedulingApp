@@ -35,10 +35,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     //MARK:- Preparations
-    func preparePasswordSignIn() {
-        self.passwordTextField.secureTextEntry = true
-    }
-    
     func prepareSubviews() {
         self.loginButton.addShadow()
         self.usernameTextField.addShadow()
@@ -51,14 +47,19 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         setupTextFieldViews()
     }
     
+    func preparePasswordSignIn() {
+        self.passwordTextField.secureTextEntry = true
+    }
+    
     func setupTextFieldViews() {
+        //Username Text Field
         usernameTextField.leftViewMode = .Always
         let imageView = UIImageView(image: UIImage(named: "User"))
-        
         imageView.contentMode = UIViewContentMode.Center
         imageView.frame = CGRectMake(0.0, 0.0, imageView.image!.size.width + 20.0, imageView.image!.size.height)
         usernameTextField.leftView = imageView
         
+        //Password Text Field
         passwordTextField.leftViewMode = .Always
         let imageView2 = UIImageView(image: UIImage(named: "Lock"))
         

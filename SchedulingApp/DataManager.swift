@@ -40,15 +40,13 @@ class DataManager {
         query!.whereKey("username", equalTo:username)
         query!.findObjectsInBackgroundWithBlock(block)
     }
-    
-    
 }
 
 //MARK:- Private Extensions
 private extension DataManager {
     func prepareParse() {
         Parse.initializeWithConfiguration(ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
-            configuration.server = "https://training-app-final.herokuapp.com/parse/"
+            configuration.server = "https://timesync-ios.herokuapp.com/parse/"
             configuration.applicationId = "myAppId"
             configuration.clientKey = ""
         }))
