@@ -9,7 +9,6 @@
 import UIKit
 
 class CalendarTableViewCell: UITableViewCell {
-
     @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventDetails: UILabel!

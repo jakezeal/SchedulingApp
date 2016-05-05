@@ -25,28 +25,70 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var membersTableView: UITableView!
     
-    //MARK:- Lifecycles
+    //MARK:- View Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareMembersTableView()
+        prepareCalendar()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        refreshCalendar()
+    }
+    
+    //MARK:- Preparations
+    func prepareMembersTableView() {
         membersTableView.delegate = self
         membersTableView.dataSource = self
+    }
+    
+    func prepareCalendar() {
         self.title = calendarObject!["title"] as? String
-
-
         self.didOpenCalendar = true
-        
         calendar.scrollDirection = .Horizontal
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
         calendar.selectDate(NSDate())
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
+    func refreshCalendar() {
         self.membersArray = calendarObject!["usernames"] as! [String]
         self.calendarDaysDict.removeAll()
         queryParse()
     }
     
+    
+    //MARK:- Segues
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showCalendarTableView" {
+            let nextVC = segue.destinationViewController as! CalendarTableViewController
+            nextVC.newDate = selectedDate
+            nextVC.calendarObject = self.calendarObject
+        }
+    }
+    
+    //MARK:- UITableViewDataSource
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
+        return "Group members"
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.membersArray.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        
+        let members = self.membersArray[indexPath.row]
+        cell.textLabel?.text = members
+
+        return cell
+    }
+    
+    //MARK:- Helpers
     func minimumDateForCalendar(calendar: FSCalendar) -> NSDate {
         return calendar.dateWithYear(2016, month: 1, day: 1)
     }
@@ -56,9 +98,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func calendar(calendar: FSCalendar, numberOfEventsForDate date: NSDate) -> Int {
-
         let dateString = formatDateString(date)
-
         if let eventCount = self.calendarDaysDict[dateString] {
             if eventCount > 3 {
                 return 3
@@ -66,56 +106,14 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 return eventCount
             }
         }
-
-        
         return 0
     }
-
+    
     func formatDateString(date: NSDate) -> String {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MMM d, yyyy"
         let dateString: String = formatter.stringFromDate(date)
         return dateString
-    }
-
-    //Query Parse for events
-    func queryParse() {
-        let relation = calendarObject!.relationForKey("events")
-        let query = relation.query()
-        
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            if error == nil && objects != nil {
-                for object in objects! {
-
-                    if let eventDateString = object["dateString"] as? String {
-                        
-//                        let maybeCount = self.calendarDaysDict[eventDateString]
-//                        if (maybeCount != nil) {
-//                            let count = maybeCount!
-//                            self.calendarDaysDict[eventDateString] = count + 1
-//                        } else {
-//                            self.calendarDaysDict[eventDateString] = 1
-//                        }
-//                        
-
-                        // if let = optional binding
-                        if let eventCount = self.calendarDaysDict[eventDateString] {
-
-                            self.calendarDaysDict[eventDateString] = eventCount + 1
-                            
-                        } else {
-                            
-                            self.calendarDaysDict[eventDateString] = 1
-                        }
-                    }
-                }
-               print(self.calendarDaysDict)
-                self.calendar.reloadData()
-            } else {
-                print(error)
-            }
-        }
     }
     
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
@@ -131,37 +129,31 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
             didOpenCalendar = false
         }
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+}
+
+private extension CalendarViewController {
+    func queryParse() {
+        let relation = calendarObject!.relationForKey("events")
+        let query = relation.query()
         
-        if segue.identifier == "showCalendarTableView" {
-            let nextVC = segue.destinationViewController as! CalendarTableViewController
-            nextVC.newDate = selectedDate
-            nextVC.calendarObject = self.calendarObject
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil && objects != nil {
+                for object in objects! {
+                    if let eventDateString = object["dateString"] as? String {
+                        if let eventCount = self.calendarDaysDict[eventDateString] {
+                            self.calendarDaysDict[eventDateString] = eventCount + 1
+                        } else {
+                            self.calendarDaysDict[eventDateString] = 1
+                        }
+                    }
+                }
+                print(self.calendarDaysDict)
+                self.calendar.reloadData()
+            } else {
+                print(error)
+            }
         }
-    }
-    
-    //TableView data source
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // Return the number of sections.
-        return 1
-    }
-    func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
-        return "Group members"
-    }
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows in the section
-        return self.membersArray.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        
-        let members = self.membersArray[indexPath.row]
-        cell.textLabel?.text = members
-
-        return cell
     }
 }

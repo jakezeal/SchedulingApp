@@ -44,9 +44,8 @@ class DataManager {
     
 }
 
-//MARK:- Extensions
+//MARK:- Private Extensions
 private extension DataManager {
-    
     func prepareParse() {
         Parse.initializeWithConfiguration(ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
             configuration.server = "https://training-app-final.herokuapp.com/parse/"

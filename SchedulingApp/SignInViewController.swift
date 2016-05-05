@@ -22,13 +22,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     // MARK:- Outlets
     @IBOutlet weak var cancelButton: UIButton!
-    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var loginButton: UIButton!
     
-    // MARK:- Lifecycles
+    //MARK:- View Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTextFields()
@@ -36,7 +34,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         prepareSubviews()
     }
     
-    // MARK:- Preparations
+    //MARK:- Preparations
     func preparePasswordSignIn() {
         self.passwordTextField.secureTextEntry = true
     }

@@ -115,20 +115,20 @@
 			isa = PBXGroup;
 			children = (
 				E20592971CC96F470042E162 /* CalendarViewController.swift */,
-				E23E08B71CCA6AA400157A81 /* Create Calendar */,
+				E23E08B71CCA6AA400157A81 /* Calendar Creation */,
 				E285FD111CCAC71000C891F2 /* CollectionView */,
 				E285FD121CCAC72500C891F2 /* Events */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
 		};
-		E23E08B71CCA6AA400157A81 /* Create Calendar */ = {
+		E23E08B71CCA6AA400157A81 /* Calendar Creation */ = {
 			isa = PBXGroup;
 			children = (
 				E23E08B51CCA608900157A81 /* AddMembersToCalendarViewController.swift */,
 				E23E08BA1CCA6B0B00157A81 /* AddMembersTableViewCell.swift */,
 			);
-			name = "Create Calendar";
+			name = "Calendar Creation";
 			sourceTree = "<group>";
 		};
 		E244CAC51CD04B9600744934 /* Supporting Files */ = {

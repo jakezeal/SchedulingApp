@@ -9,13 +9,11 @@
 import UIKit
 
 class CalendarCollectionViewCell: UICollectionViewCell {
-    
     //MARK:- Outlets
     @IBOutlet weak var groupLabel: UILabel!
-    
     @IBOutlet weak var calendarImage: UIImageView!
  
-    
+    //MARK:- View Lifecycles
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.borderColor = UIColor(red: 202.0/255.0, green: 15.0/255.0, blue: 19.0/255.0, alpha: 1.0/255.0).colorWithAlphaComponent(0.6).CGColor

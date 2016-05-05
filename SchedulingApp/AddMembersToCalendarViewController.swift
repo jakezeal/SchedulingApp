@@ -23,7 +23,7 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    //MARK:- Lifecycles
+    //MARK:- View Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTableView()
@@ -31,35 +31,10 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //self.performSelector(#selector(AddMembersToCalendarViewController.showAlert), withObject: self, afterDelay: 1.0)
         showAlert()
     }
     
-    func showAlert(){
-        let alertController = UIAlertController(title: "Create Calendar", message: "Enter a name for your calendar", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
-            alert -> Void in
-            let calendarName = alertController.textFields![0] as UITextField
-            self.cal["title"] = calendarName.text
-            self.title = calendarName.text
-        })
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
-            (action : UIAlertAction!) -> Void in
-            self.navigationController?.popViewControllerAnimated(true)
-        })
-        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
-            textField.placeholder = "Calendar name"
-//            textField.tintColor = UIColor(red: 202.0, green: 15.0, blue: 19.0, alpha: 1.0)
-        }
-
-        alertController.addAction(saveAction)
-        alertController.addAction(cancelAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    // MARK:- Preperations
+    // MARK:- Preparations
     func prepareTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -77,13 +52,13 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     }
     
     // MARK:- UITableViewDataSource
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
     func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
         return "Group members"
     }
-
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
@@ -109,7 +84,6 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
             let user = User()
             user.name = self.userTextField.text!
             self.users.insert(user,atIndex:0)
-            //make an array of usernames at same time
             self.usernames.append(user.name!)
             self.tableView.reloadData()
             self.userTextField.text = ""
@@ -117,14 +91,39 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
             let alertController = UIAlertController(title: "User does not exist!", message: "Please check spelling and try again", preferredStyle: .Alert)
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)
-            
             presentViewController(alertController, animated: true, completion: nil)
         }
+    }
+}
+
+//MARK:- Private Extensions
+private extension AddMembersToCalendarViewController {
+    
+    func showAlert() {
+        let alertController = UIAlertController(title: "Create Calendar", message: "Enter a name for your calendar", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
+            let calendarName = alertController.textFields![0] as UITextField
+            self.cal["title"] = calendarName.text
+            self.title = calendarName.text
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+            (action : UIAlertAction!) -> Void in
+            self.navigationController?.popViewControllerAnimated(true)
+        })
+        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            textField.placeholder = "Calendar name"
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func queryUsers() {
         DataManager.sharedInstance.queryUsersWithTextField(self.userTextField.text!) { (objects, error) in
-            
             if error == nil {
                 if objects!.count > 0 {
                     self.userExists = true
@@ -146,8 +145,7 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     }
     
     func saveCalendarToParse(completion: (result: String) -> Void) {
-        // Save calendar name, users associated with it and 0 events.
-        //let cal = PFObject(className:"Calendar")
+        // Save initial calendar.
         
         let username = self.user!["username"] as! String
         self.usernames.append(username)
@@ -162,4 +160,5 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
             }
         }
     }
+    
 }

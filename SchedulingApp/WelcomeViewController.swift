@@ -1,6 +1,6 @@
 //
 //  WelcomeViewController.swift
-//  Artoogo
+//  SchedulingApp
 //
 //  Created by Zeal on 2016-04-18.
 //  Copyright © 2015 Jake Zeal. All rights reserved.
@@ -23,13 +23,13 @@ class WelcomeViewController : UIViewController {
         prepareSubviews()
     }
     
-    //MARK:- Preperations
+    //MARK:- Preparations
     func prepareView() {
        self.navigationController?.navigationBarHidden = true
     }
     
     func prepareImageView() {
-        self.imageView.image = UIImage.init(named: "Calendar-1")
+        self.imageView.image = UIImage(named: "Calendar-1")
     }
     
     func prepareSubviews() {

@@ -9,16 +9,13 @@
 import UIKit
 
 class ForgotPasswordViewController : UIViewController {
-    
+    //MARK:- Outlets
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var sendEmailButton: UIButton!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+    //MARK:- Actions
     @IBAction func sendEmailButtonPressed(sender: AnyObject) {
         
     }

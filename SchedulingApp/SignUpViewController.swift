@@ -34,7 +34,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         prepareSubviews()
     }
     
-    // MARK:- Preperations
+    // MARK:- Preparations
     func prepareTextFields() {
         usernameTextField.delegate = self
         emailTextField.delegate = self
