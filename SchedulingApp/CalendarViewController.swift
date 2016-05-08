@@ -8,7 +8,6 @@
 
 import UIKit
 import FSCalendar
-import Parse
 
 class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate,UITableViewDataSource, UITableViewDelegate {
     
@@ -16,7 +15,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     var didOpenCalendar: Bool!
     var selectedDate = NSDate()
     var dateString: String?
-    var calendarObject: PFObject?
+    
     var membersArray:[String] = []
     var calendarDaysDict = [String:Int]()
     
@@ -44,7 +43,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func prepareCalendar() {
-        self.title = calendarObject!["title"] as? String
+        self.title = DataManager.sharedInstance.calendarObject!["title"] as? String
         self.didOpenCalendar = true
         calendar.scrollDirection = .Horizontal
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
@@ -52,18 +51,17 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func refreshCalendar() {
-        self.membersArray = calendarObject!["usernames"] as! [String]
+        self.membersArray = DataManager.sharedInstance.calendarObject!["usernames"] as! [String]
         self.calendarDaysDict.removeAll()
-        queryParse()
+        queryCalendars()
     }
-    
     
     //MARK:- Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCalendarTableView" {
             let nextVC = segue.destinationViewController as! CalendarTableViewController
             nextVC.newDate = selectedDate
-            nextVC.calendarObject = self.calendarObject
+            nextVC.calendarObject = DataManager.sharedInstance.calendarObject
         }
     }
     
@@ -80,7 +78,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(IdentifierConstants.cellIdentifier, forIndexPath: indexPath)
         
         let members = self.membersArray[indexPath.row]
         cell.textLabel?.text = members
@@ -116,13 +114,8 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         return dateString
     }
     
-    func calendarCurrentPageDidChange(calendar: FSCalendar) {
-        NSLog("change page to \(calendar.stringFromDate(calendar.currentPage))")
-    }
-    
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
-        if (didOpenCalendar == false){
-            //NSLog("calendar did select date \(calendar.stringFromDate(date))")
+        if (didOpenCalendar == false) {
             self.selectedDate = date
             performSegueWithIdentifier("showCalendarTableView", sender: nil)
         } else if (didOpenCalendar == true) {
@@ -132,12 +125,8 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
 }
 
 private extension CalendarViewController {
-    func queryParse() {
-        let relation = calendarObject!.relationForKey("events")
-        let query = relation.query()
-        
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
+    func queryCalendars() {
+        DataManager.sharedInstance.queryCalendars() { (objects, error) in
             
             if error == nil && objects != nil {
                 for object in objects! {
@@ -149,10 +138,9 @@ private extension CalendarViewController {
                         }
                     }
                 }
-                print(self.calendarDaysDict)
                 self.calendar.reloadData()
             } else {
-                print(error)
+                print(error?.localizedDescription)
             }
         }
     }

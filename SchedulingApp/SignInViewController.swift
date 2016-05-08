@@ -10,16 +10,6 @@ import UIKit
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
-    // MARK:- Constants
-    struct SignInViewControllerConstants {
-        static let successTitle = "Welcome back!"
-        static let successMessage = "User Logged In"
-        static let successActionTitle = "Dismiss"
-        static let errorTitle = "User not found!"
-        static let errorMessage = "Please sign up"
-        static let errorActionTitle = "OK"
-    }
-    
     // MARK:- Outlets
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -30,7 +20,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTextFields()
-        preparePasswordSignIn()
+        prepareSecureSignIn()
         prepareSubviews()
     }
     
@@ -47,7 +37,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         setupTextFieldViews()
     }
     
-    func preparePasswordSignIn() {
+    func prepareSecureSignIn() {
         self.passwordTextField.secureTextEntry = true
     }
     
@@ -75,6 +65,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         if !(username ?? "").isEmpty && !(password ?? "").isEmpty {
             userSignIn(username!, password: password!)
+            DataManager.sharedInstance.updateUser()
         } else {
             showAlert()
         }

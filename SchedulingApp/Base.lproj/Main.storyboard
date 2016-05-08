@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="J8E-dW-Wb5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="J8E-dW-Wb5">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -99,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="366.5" y="1244.5"/>
+            <point key="canvasLocation" x="70.5" y="1204.5"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="A4U-h0-sbY">
@@ -597,8 +597,8 @@
                                     <action selector="sendEmailButtonPressed:" destination="D9W-U9-RGJ" eventType="touchUpInside" id="Sgh-Al-Xno"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iW-jy-q3e">
-                                <rect key="frame" x="328" y="77" width="24" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iW-jy-q3e">
+                                <rect key="frame" x="322" y="72" width="37" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="37" id="UXF-wc-hkd"/>
                                     <constraint firstAttribute="height" constant="35" id="daE-wf-GAq"/>
@@ -796,8 +796,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gx-jr-f00">
-                                <rect key="frame" x="267" y="75" width="24" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gx-jr-f00">
+                                <rect key="frame" x="261" y="64" width="43" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="0zR-ZK-J5m"/>
                                     <constraint firstAttribute="width" constant="43" id="gJB-fM-Vag"/>
@@ -959,7 +959,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nSn-91-A98" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10" y="658"/>
+            <point key="canvasLocation" x="-93" y="573"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eeZ-Bq-dvm">
@@ -985,6 +985,6 @@
         <image name="Cancel" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rDg-rE-OYi"/>
+        <segue reference="nEc-dh-1lf"/>
     </inferredMetricsTieBreakers>
 </document>

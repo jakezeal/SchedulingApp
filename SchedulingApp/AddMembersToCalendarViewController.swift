@@ -7,16 +7,13 @@
 //
 
 import UIKit
-import Parse
 
-class AddMembersToCalendarViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
+class AddMembersToCalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK:- Properties
     var userExists:Bool!
     var users:[User] = []
     var usernames:[String] = []
-    var cal = PFObject(className:"Calendar")
-    var user = PFUser.currentUser()
     
     // MARK:- Outlets
     @IBOutlet weak var calendarTextField: UITextField!
@@ -46,7 +43,7 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     }
     
     @IBAction func saveCalendar(sender: UIBarButtonItem) {
-        saveCalendarToParse { (result) in
+        saveCalendar { 
             self.navigationController?.popViewControllerAnimated(true)
         }
     }
@@ -65,8 +62,8 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "Cell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! AddMembersTableViewCell
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(IdentifierConstants.cellIdentifier, forIndexPath: indexPath) as! AddMembersTableViewCell
         
         let user: User = self.users[indexPath.row]
         cell.userLabel.text = user.name
@@ -100,65 +97,66 @@ class AddMembersToCalendarViewController: UIViewController, UITableViewDataSourc
 private extension AddMembersToCalendarViewController {
     
     func showAlert() {
-        let alertController = UIAlertController(title: "Create Calendar", message: "Enter a name for your calendar", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Create Calendar", message: "Enter a name for your calendar", preferredStyle: .Alert)
         
-        let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
-            alert -> Void in
-            let calendarName = alertController.textFields![0] as UITextField
-            self.cal["title"] = calendarName.text
-            self.title = calendarName.text
-        })
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
-            (action : UIAlertAction!) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
             self.navigationController?.popViewControllerAnimated(true)
-        })
-        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+        }
+        
+        let saveAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            //Set calendar name and navigation bar title to user input text.
+            if let calendarName = alertController.textFields?[0] {
+                DataManager.sharedInstance.calendar["title"] = calendarName.text
+                self.title = calendarName.text
+            }
+        }
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
             textField.placeholder = "Calendar name"
         }
         
-        alertController.addAction(saveAction)
+        //Add Actions
         alertController.addAction(cancelAction)
+        alertController.addAction(saveAction)
         
+        //Present View Controller
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func queryUsers() {
         DataManager.sharedInstance.queryUsersWithTextField(self.userTextField.text!) { (objects, error) in
-            if error == nil {
-                if objects!.count > 0 {
-                    self.userExists = true
-                } else {
-                    self.userExists = false
-                }
-                if let objects = objects {
-                    for object in objects {
-                        if let result = object["username"] as? String {
-                            print(result)
-                        }
-                    }
-                    self.handleUser()
-                }
-            } else {
+            
+            guard error == nil else {
                 print("Error: \(error!.localizedDescription) \(error!.userInfo)")
+                return
             }
+            
+            guard let objects = objects where objects.count > 0 else {
+                self.userExists = false
+                self.handleUser()
+                return
+            }
+            
+            self.userExists = true
+            self.handleUser()
         }
     }
     
-    func saveCalendarToParse(completion: (result: String) -> Void) {
-        // Save initial calendar.
+    func saveCalendar(completion: () -> Void) {
         
-        let username = self.user!["username"] as! String
-        self.usernames.append(username)
-        self.cal["usernames"] = self.usernames
+        if let username = DataManager.sharedInstance.user?["username"] as? String {
+            self.usernames.append(username)
+            print(username)
+        }
         
-        cal.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
-            if (success) {
-                completion(result: "Yay")
-            } else {
-                print("Error ==>>> \(error?.localizedDescription)")
+        DataManager.sharedInstance.calendar["usernames"] = self.usernames
+        
+        DataManager.sharedInstance.calendar.saveInBackgroundWithBlock { (success, error) in
+            guard success else {
+                print(error?.localizedDescription)
+                return
             }
+            completion()
         }
     }
-    
 }

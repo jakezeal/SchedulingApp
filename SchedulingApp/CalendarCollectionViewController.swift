@@ -15,7 +15,6 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     var calendarNames: [String] = []
     var calendars: [PFObject] = []
     var events: [PFObject] = []
-    var refreshControl: UIRefreshControl!
     
     //MARK:- Outlets
     @IBOutlet weak var allEventsTableView: UITableView!
@@ -60,8 +59,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cellIdentifier = "Cell"
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! CalendarCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CalendarCollectionViewCell
         
         cell.calendarImage.image = UIImage(named: "calendar")
         cell.calendarImage.contentMode = .ScaleAspectFill
@@ -73,7 +71,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     
     //MARK:- UITableViewDataSource
     func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String? {
-        return "Next Events"
+        return "Upcoming Events"
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -99,8 +97,6 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         let todaysDate = NSDate()
         let interval = eventTime.timeIntervalSinceDate(todaysDate)
         
-        print(interval)
-        
         cell.event = self.events[indexPath.row]
         
         cell.titleLabel.text = nameString
@@ -116,21 +112,14 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         return cell
     }
     
-    //MARK:- UITableViewDelegate
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.allEventsTableView.cellForRowAtIndexPath(indexPath)
-        NSLog("did select and the text is \(cell?.textLabel?.text)")
-    }
-    
     //MARK:- Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showCalendar" {
-            let calendarVC = segue.destinationViewController as! CalendarViewController
             
             if let selectedCell = sender as? CalendarCollectionViewCell {
                 let indexPath = collectionView.indexPathForCell(selectedCell)!
-                calendarVC.calendarObject = calendars[indexPath.row]
+                DataManager.sharedInstance.calendarObject = calendars[indexPath.row]
             }
         } else if segue.identifier == "EventDetailsSegue" {
             let eventDetailsVC = segue.destinationViewController as! CalendarDetailsViewController
@@ -152,9 +141,9 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
 private extension CalendarCollectionViewController {
     
     func queryParse() {
-        let currentUser = PFUser.currentUser()
+        DataManager.sharedInstance.updateUser()
         let query = PFQuery(className:"Calendar")
-        query.whereKey("usernames", equalTo: currentUser!["username"])
+        query.whereKey("usernames", equalTo: DataManager.sharedInstance.user!["username"])
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil && objects != nil {

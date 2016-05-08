@@ -10,15 +10,6 @@ import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
-    // MARK:- Constants
-    struct SignUpViewControllerConstants {
-        static let successMessage = "You Signed Up!"
-        static let successTitle = "Success"
-        static let errorTitle = "Warning"
-        static let errorMessage = "All Fields Required"
-        static let errorActionTitle = "Dismiss"
-    }
-    
     // MARK:- Outlets
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -84,25 +75,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBAction func signUpButtonPressed(sender: AnyObject) {
         let username = usernameTextField.text
         let password = passwordTextField.text
-        let isTrainer = true
         
         if !(username ?? "").isEmpty && !(password ?? "").isEmpty {
-            userSignup(username!, password: password!, isTrainer: isTrainer)
-            self.navigationController?.popViewControllerAnimated(true)
-
+            userSignup(username!, password: password!)
         } else {
             showAlert()
         }
     }
     
     // MARK:- Helpers
-    func userSignup(username:String, password:String, isTrainer: Bool) {
+    func userSignup(username:String, password:String) {
         DataManager.sharedInstance.signUpUser(username, password: password) { (succeeded, error) -> Void in
-            if error == nil {
-                self.showAlert(SignUpViewControllerConstants.successTitle, message: SignUpViewControllerConstants.successMessage)
-            } else {
-                self.showAlert()
-            }
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
 }
